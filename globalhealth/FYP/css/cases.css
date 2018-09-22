@@ -1,0 +1,163 @@
+
+
+#bigtitle {
+font-size: 30px;
+margin-left: 550px;
+margin-bottom: 10px;
+margin-top: 10px;
+}
+#main {
+  font: 10px sans-serif;
+}
+#buttons {
+font-size:15px;
+margin-left: 70px;
+}
+
+
+.hover {
+  text-align: center;
+  
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: black	;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+
+}
+
+h4 {
+  text-align: center;
+}
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+#main {
+height: 280px;
+width: 1300px;
+}
+#box {
+margin-left: 160px;
+}
+#chart1 {
+position: relative;
+border-style: solid;
+border-width: 2px;
+border-color: #CCC;
+border-collapse: collapse;
+height: 280px;
+width: 500px;
+float: left;
+}
+#chart2 {
+position: relative;
+border-style: solid;
+border-width: 2px;
+border-color: #CCC;
+border-collapse: collapse;
+height: 280px;
+width: 500px;
+float: left;
+}
+#chart3 {
+position: relative;
+border-style: solid;
+border-width: 2px;
+border-color: #CCC;
+border-collapse: collapse;
+height: 280px;
+width: 500px;
+float: left;
+}
+#chart4 {
+position: relative;
+border-style: solid;
+border-width: 2px;
+border-color: #CCC;
+border-collapse: collapse;
+height: 280px;
+width: 500px;
+float: left;
+}
+#chart5 {
+position: relative;
+border-style: solid;
+border-width: 2px;
+border-color: #CCC;
+border-collapse: collapse;
+height: 280px;
+width: 500px;
+float: left;
+}
+#chart6 {
+position: relative;
+border-style: solid;
+border-width: 2px;
+border-color: #CCC;
+border-collapse: collapse;
+height: 280px;
+width: 500px;
+float: left;
+}
+#chart7 {
+position: relative;
+border-style: solid;
+border-width: 2px;
+border-color: #CCC;
+border-collapse: collapse;
+height: 280px;
+width: 500px;
+float: left;
+}
+#chart8 {
+position: relative;
+border-style: solid;
+border-width: 2px;
+border-color: #CCC;
+border-collapse: collapse;
+height: 280px;
+width: 500px;
+float: left;
+}
+#chart9 {
+position: relative;
+border-style: solid;
+border-width: 2px;
+border-color: #CCC;
+border-collapse: collapse;
+height: 280px;
+width: 500px;
+float: left;
+}
+#chart10 {
+position: relative;
+border-style: solid;
+border-width: 2px;
+border-color: #CCC;
+border-collapse: collapse;
+height: 280px;
+width: 500px;
+float: left;
+}
+.bar1 {
+  fill: skyblue;
+}
+.bar1:hover {
+  fill: brown;
+}	

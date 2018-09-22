@@ -1,0 +1,546 @@
+keyword,id,total_amount,category,group,organization,start_year
+obesity,1,1742,obesity,high,New Mexico Business Roundtable for Educational Excellence,2011
+diabetes,2,640,diabetes,high,Trustees of Dartmouth College,2003
+mortality,3,501,mortality,high,Denver School of Science and Technology Inc.,2010
+heart failure,4,393,heart,high,The NEA Foundation for the Improvement of Education,2007
+diabetes mellitus,5,367,diabetes,high,New Schools for New Orleans,2003
+apoptosis,6,328,death,high,Battelle For Kids,2002
+cancer,7,296,cancer,high,FSG Social Impact Advisors,2000
+malnutrition,8,280,malnutrition,high,Aspire Public Schools,2009
+type 2 diabetes,9,269,diabetes,high,Educational Policy Improvement Center,2003
+obesity,10,242,diabetes,high,E3 Alliance,2003
+body mass index,11,230,obesity,high,"Hillsborough Education Foundation, Inc.",2011
+breast cancer,12,227,cancer,high,The College-Ready Promise,2000
+mortality,13,212,death,high,Memphis City Schools Foundation,2002
+epidemiology,14,203,population,high,Pittsburgh Public Schools,2012
+metabolic syndrome,15,200,obesity,high,Greater Houston Community Foundation,2011
+insulin resistance,16,199,obesity,high,"New Visions for Public Schools, Inc",2011
+diabetes,17,189,obesity,high,School District of Philadelphia,2011
+economic factors,18,169,finance,high,Hamilton County Department of Education,2005
+inflammation,19,158,obesity,high,Internationals Network For Public Schools Inc,2011
+myocardial infarction,20,148,heart,high,Achieve Minneapolis,2007
+type 2 diabetes mellitus,21,147,diabetes,high,The College-Ready Promise,2003
+prostate cancer,22,139,cancer,high,Texas Public Education Reform Foundation,2000
+insulin resistance,23,138,diabetes,high,New York City Center for Charter School Excellence,2003
+atrial fibrillation,24,137,heart,high,"SEED Foundation, Inc.",2007
+epidemiology,25,131,mortality,high,City of New Haven,2010
+prognosis,26,125,mortality,high,President and Fellows of Harvard College,2010
+developing countries,27,120,finance,high,The Library of Congress,2005
+insulin,28,118,diabetes,high,Austin Voices for Education and Youth,2003
+overweight,29,118,obesity,high,Prichard Committee for Academic Excellence,2011
+physical activity,30,118,obesity,high,Council Of The Great City Schools,2011
+hypertension,31,117,obesity,high,New Schools for New Orleans,2011
+apoptosis,32,117,cancer,high,Education Equality Project,2000
+alzheimer's disease,33,114,disease,high,Education Writers Association,2004
+hypertension,34,112,diabetes,high,Alliance for Education,2003
+metabolic syndrome,35,111,diabetes,high,Texas Public Education Reform Foundation,2003
+type 1 diabetes,36,110,diabetes,high,Charlotte-Mecklenburg Schools,2003
+cell death,37,109,death,high,Washington State Commission on African American Affairs,2002
+congenital heart disease,38,108,heart,high,Cristo Rey Network,2007
+hypertension,39,108,heart,high,American Institutes for Research,2007
+prognosis,40,108,cancer,high,Professional Educator Standards Board,2000
+mortality,41,106,heart,high,Fund for Public Schools Inc.,2007
+colorectal cancer,42,106,cancer,high,DC VOICE,2000
+inflammation,43,105,diabetes,high,Tiger Woods Foundation Inc.,2003
+epidemiology,44,105,obesity,high,"Public Agenda Foundation, Inc.",2011
+vitamin d,45,105,malnutrition,high,Rensselaer Polytechnic Institute,2009
+heart failure,46,103,mortality,high,National Commission on Teachings & America's Future,2010
+prognosis,47,102,death,high,President and Fellows of Harvard College,2002
+survival,48,101,mortality,high,Illinois State Board of Education,2010
+type 2 diabetes,49,99,obesity,medium,Rensselaer Polytechnic Institute,2011
+population,50,97,finance,medium,New Schools Fund dba NewSchools Venture Fund,2005
+cardiovascular disease,51,96,diabetes,medium,New Schools Fund dba NewSchools Venture Fund,2003
+echocardiography,52,96,heart,medium,Texas Charter Schools Association,2007
+leptin,53,96,obesity,medium,American Federation Of Teachers Educational Foundation,2011
+autophagy,54,94,death,medium,National Center For Educational Achievement,2002
+nutrition,55,94,malnutrition,medium,Military Child Education Coalition,2009
+cancer,56,92,death,medium,DC Public Education Fund,2002
+weight loss,57,92,obesity,medium,Grantmakers for Education,2011
+adipose tissue,58,92,obesity,medium,Envision Schools,2011
+epidemiology,59,91,hygiene,medium,Silicon Valley Community Foundation,2008
+demographic factors,60,91,finance,medium,"ACT, Inc.",2005
+oxidative stress,61,90,diabetes,medium,Arkansas Department of Education,2003
+oxidative stress,62,90,death,medium,Florida Department of Education,2002
+bariatric surgery,63,90,obesity,medium,Georgia Department of Education,2011
+children,64,88,obesity,medium,Louisiana Department of Education,2011
+outcome,65,88,mortality,medium,Ohio Department of Education,2010
+epidemiology,66,88,diabetes,medium,California Polytechnic State University Foundation,2003
+heart failure,67,88,death,medium,Tennessee State Collaborative on Reforming Education,2002
+epidemiology,68,87,heart,medium,Twenty First Century Foundation,2007
+mortality,69,86,population,medium,Alliance for Education,2012
+inflammation,70,85,disease,medium,National Council of La Raza,2004
+bmi,71,85,obesity,medium,American Institutes for Research,2011
+chemotherapy,72,83,cancer,medium,"University System of Georgia Foundation, Inc.",2000
+lung cancer,73,83,cancer,medium,Common Core Inc.,2000
+heart rate,74,83,heart,medium,National Council for the Social Studies,2007
+cardiovascular disease,75,82,heart,medium,Pittsburgh Public Schools,2007
+blood pressure,76,81,heart,medium,The NEA Foundation for the Improvement of Education,2007
+workforce,77,81,workforce,medium,"L.U.L.A.C. Institute, Inc.",2014
+obesity,78,81,population,medium,"University of California, Los Angeles",2012
+coronary artery disease,79,80,heart,medium,"Leadership Conference on Civil Rights Education Fund, Inc.",2007
+survival,80,80,death,medium,Florida Department of Education,2002
+inflammation,81,80,death,medium,Thomas B. Fordham Institute,2002
+prevalence,82,79,population,medium,Council of State Governments,2012
+risk factors,83,78,obesity,medium,Mexican American Legal Defense and Educational Fund,2011
+diabetes mellitus,84,78,obesity,medium,"L.U.L.A.C. Institute, Inc.",2011
+heart,85,78,heart,medium,National Summer Learning Association,2007
+risk factors,86,78,diabetes,medium,"Teachers College, Columbia University",2003
+oral hygiene,87,77,hygiene,medium,Communities Foundation of Texas,2008
+stroke,88,76,heart,medium,Business Higher Education Forum,2007
+stroke,89,75,death,medium,National Staff Development Council,2002
+biodegradation,90,75,sanitation,medium,Southeast Asia Resource Action Center,2013
+epidemiology,91,75,death,medium,Roads to Success Inc.,2002
+cardiovascular disease,92,74,obesity,medium,MCNC,2011
+stroke,93,74,mortality,medium,Regents of the University of California at Berkeley,2010
+metastasis,94,73,cancer,medium,National Association of State Boards of Education,2000
+cholera,95,72,cholera,medium,Pollinate Ventures,2001
+prognosis,96,72,heart,medium,Fund for Public Schools Inc.,2007
+coronary heart disease,97,70,heart,medium,KIPP Foundation,2007
+outcomes,98,70,mortality,medium,Mathematica Policy Research,2010
+inflammation,99,70,heart,medium,MCNC,2007
+diet,100,70,obesity,medium,Guaranteach,2011
+population dynamics,101,70,finance,medium,"Strive: Cincinnati/Northern Kentucky, LLC",2005
+health,102,68,finance,medium,New Teacher Center,2005
+adiponectin,103,68,obesity,medium,New Technology Foundation,2011
+survival,104,68,cancer,medium,"University of California, Los Angeles",2000
+mitochondria,105,68,death,medium,National Conference of State Legislatures,2002
+atherosclerosis,106,68,heart,medium,Gateway to College National Network,2007
+risk factors,107,68,population,medium,Ohio Business Alliance for Higher Education and the Economy,2012
+stroke,108,67,diabetes,medium,Social Science Research Council,2003
+africa,109,67,finance,medium,National Alliance For Public Charter Schools,2005
+epidemiology,110,66,disease,medium,Nellie Mae Education Foundation,2004
+parkinson's disease,111,66,disease,medium,Seattle Biomedical Research Institute,2004
+pregnancy,112,65,obesity,medium,"Teach for America, Inc.",2011
+cardiovascular disease,113,65,disease,medium,"Fund for the City of New York, Inc.",2004
+cancer,114,64,mortality,medium,National Indian Education Association,2010
+exercise,115,64,obesity,medium,Center on Education Policy,2011
+cardiovascular disease,116,64,mortality,medium,Texas Valley Communities Foundation,2010
+depression,117,63,population,medium,President and Fellows of Harvard College,2012
+hand hygiene,118,63,hygiene,medium,"Alliance for Excellent Education, Inc.",2008
+sudden cardiac death,119,62,death,medium,Regents University Of California Los Angeles,2002
+epidemiology,120,62,healthcare,medium,Innosight Institute Inc,2006
+asia,121,60,finance,medium,Committee for Economic Development,2005
+obesity,122,59,heart,medium,Prichard Committee for Academic Excellence,2007
+risk factors,123,59,mortality,medium,National Association of State Boards of Education,2010
+myocardial infarction,124,59,mortality,medium,National Center For Educational Achievement,2010
+blood pressure,125,58,obesity,medium,National Council of La Raza,2011
+primary care,126,58,healthcare,medium,Partnership for Learning,2006
+diabetes,127,57,heart,medium,Hope Street Group,2007
+metabolism,128,57,obesity,medium,Institute for a Competitive Workforce,2011
+organization and administration,129,56,finance,medium,Educational Policy Improvement Center,2005
+meta-analysis,130,56,mortality,medium,Target Area Development Corporation,2010
+atherosclerosis,131,56,diabetes,medium,National Association of Street Schools,2003
+metformin,132,55,diabetes,medium,Tides Center,2003
+myocardial infarction,133,55,death,medium,The Schott Foundation For Public Education,2002
+death,134,54,death,medium,National School Boards Foundation,2002
+children,135,54,population,medium,National Student Clearinghouse,2012
+elderly,136,54,mortality,medium,National Urban League Inc.,2010
+oral health,137,54,hygiene,medium,The Washington State Board of Education,2008
+heart rate variability,138,54,heart,medium,Denver Public Schools,2007
+mortality,139,54,diabetes,medium,Business Higher Education Forum,2003
+morbid obesity,140,53,obesity,medium,National Council of La Raza,2011
+oxidative stress,141,53,heart,medium,Friendship Public Charter School,2007
+diabetic nephropathy,142,53,diabetes,medium,Local Initiatives Support Corporation,2003
+financial activities,143,53,finance,medium,Thomas B. Fordham Institute,2005
+pregnancy,144,53,diabetes,medium,NCB Capital Impact,2003
+risk factors,145,53,heart,medium,Baton Rouge Area Foundation,2007
+surgery,146,53,mortality,medium,University of Washington,2010
+reactive oxygen species,147,52,death,medium,Achievement First Inc.,2002
+cancer,148,52,population,medium,American Federation Of Teachers Educational Foundation,2012
+vibrio cholerae,149,52,cholera,medium,President and Fellows of Harvard College,2001
+qualitative research,150,51,healthcare,medium,Team Pennsylvania Foundation,2006
+gastric cancer,151,51,cancer,medium,The Education Trust,2000
+exercise,152,51,heart,medium,Ohio Grantmakers Forum,2007
+childhood obesity,153,51,obesity,medium,University of Wisconsin,2011
+prognosis,154,51,disease,medium,"Teach for America, Inc.",2004
+americas,155,50,finance,medium,United Way Inc.,2005
+nutrition,156,50,obesity,medium,Public Education Network,2011
+nutritional status,157,50,malnutrition,medium,Recovery School District,2009
+developed countries,158,50,finance,medium,Center on Education Policy,2005
+risk factors,159,50,hygiene,medium,College Success Foundation,2008
+breast cancer,160,50,death,medium,Houston Independent School District,2002
+adsorption,161,50,sanitation,medium,Ohio Department of Education,2013
+neuroprotection,162,50,death,medium,Seattle Foundation,2002
+waist circumference,163,49,obesity,low,Center for American Progress,2011
+nursing,164,49,workforce,low,EdVisions Inc,2014
+dementia,165,49,disease,low,College for All Texans Foundation: Closing the Gaps,2004
+melanoma,166,49,cancer,low,"Education Development Center, Inc.",2000
+hyperglycemia,167,49,diabetes,low,Fund for Educational Excellence,2003
+radiotherapy,168,49,cancer,low,University of Texas at Austin,2000
+oxidative stress,169,49,obesity,low,"Rockefeller Philanthropy Advisors, Inc.",2011
+depression,170,48,obesity,low,Council of Chief State School Officers,2011
+socioeconomic factors,171,48,finance,low,College Summit Inc.,2005
+body composition,172,48,obesity,low,Dallas Independent School District,2011
+pulmonary hypertension,173,48,heart,low,National Center for the Improvement of Educational Assessment Inc.,2007
+elderly,174,48,population,low,College Summit Inc,2012
+biomarker,175,48,cancer,low,Charlotte-Mecklenburg Schools,2000
+programs,176,48,finance,low,"ACT, Inc.",2005
+oxidative stress,177,48,disease,low,Partnership for Learning,2004
+infection control,178,47,hygiene,low,Tulsa Public Schools,2008
+type 2 diabetes mellitus,179,47,obesity,low,League of Education Voters Foundation,2011
+stroke,180,47,population,low,National Center on Education & the Economy,2012
+autophagy,181,47,cancer,low,Educational Testing Service,2000
+prevalence,182,47,obesity,low,Pacific Institute For Community Organizations,2011
+atrial fibrillation,183,47,mortality,low,The Urban Teacher Residency Institute,2010
+apoptosis,184,46,diabetes,low,Advance Illinois,2003
+inflammation,185,46,mortality,low,"Teach for America, Inc.",2010
+diseases,186,46,cholera,low,New Schools Fund dba NewSchools Venture Fund,2001
+education,187,46,workforce,low,University of Chicago - Urban Education Institute,2014
+hygiene,188,45,hygiene,low,"Rockefeller Philanthropy Advisors, Inc.",2008
+cancer,189,45,disease,low,Board Of Control For Southern Regional Education,2004
+diabetes,190,45,population,low,Memphis City Schools,2012
+aging,191,45,obesity,low,Editorial Projects in Education,2011
+insulin,192,45,obesity,low,National Congress of Parents and Teachers,2011
+sepsis,193,45,mortality,low,Deutsche Bank Americas Foundation,2010
+inflammation,194,45,cancer,low,Project GRAD,2000
+children,195,45,hygiene,low,The Trust For Early Education Inc,2008
+high-fat diet,196,44,obesity,low,Communities Foundation of Texas,2011
+angiogenesis,197,44,cancer,low,CELT Corporation,2000
+prevalence,198,44,diabetes,low,Americas Promise-The Alliance For Youth,2003
+hypoglycemia,199,44,diabetes,low,"The James B. Hunt, Jr. Institute for Educational Leadership and Policy",2003
+coronary artery disease,200,44,disease,low,The Bridgespan Group,2004
+outcome,201,44,death,low,Math Solutions,2002
+chronic kidney disease,202,44,disease,low,IB Fund US Inc.,2004
+hypertension,203,44,mortality,low,National Governors Association Center For Best Practices,2010
+children,204,44,malnutrition,low,DC Public Education Fund,2009
+ovarian cancer,205,44,cancer,low,Prince George's County Public Schools,2000
+morbidity,206,43,mortality,low,Hillsborough County Public Schools,2010
+quality of life,207,43,cancer,low,National Council on Teacher Quality,2000
+treatment,208,43,mortality,low,National Alliance For Public Charter Schools,2010
+stroke,209,43,healthcare,low,Institute for a Competitive Workforce,2006
+magnetic resonance imaging,210,43,heart,low,"Alliance for Excellent Education, Inc.",2007
+cardiovascular disease,211,43,population,low,Fund for Public Schools Inc.,2012
+hypertension,212,43,population,low,Aspire Public Schools,2012
+hiv,213,43,hygiene,low,Communities Foundation of Texas,2008
+adolescent,214,42,obesity,low,National Association Of Charter School Authorizers,2011
+child,215,42,obesity,low,Regents Of The University Of California At Berkeley,2011
+pregnancy,216,42,population,low,New York University,2012
+*developing countries,217,42,finance,low,University of Chicago (Parent Org),2005
+family planning,218,42,finance,low,"Third Sector New England, Inc.",2005
+workforce issues,219,42,workforce,low,New Venture Fund,2014
+public health,220,42,hygiene,low,The Big Picture Company,2008
+north america,221,42,finance,low,"Rockefeller Philanthropy Advisors, Inc.",2005
+prevention,222,42,obesity,low,Idea Academy Inc,2011
+depression,223,42,healthcare,low,College Summit Inc,2006
+hepatocellular carcinoma,224,41,cancer,low,Regents Of The University Of California At Berkeley,2000
+meta-analysis,225,41,population,low,Council Of The Great City Schools,2012
+policy,226,41,finance,low,Dallas Independent School District,2005
+treatment,227,41,disease,low,The Aspen Institute,2004
+immunohistochemistry,228,41,cancer,low,New Schools Fund dba NewSchools Venture Fund,2000
+cancer,229,41,healthcare,low,New Schools Fund dba NewSchools Venture Fund,2006
+immunotherapy,230,41,cancer,low,"Newark Charter School Fund, Inc.",2000
+developing countries,231,40,cholera,low,"SeaChange Capital Partners, Inc.",2001
+coronary artery disease,232,40,diabetes,low,United Way of America,2003
+adolescents,233,40,obesity,low,"Teach Plus, Incorporated",2011
+quality of life,234,40,population,low,The Big Picture Company,2012
+glucose,235,40,diabetes,low,DonorsChoose.org,2003
+elderly,236,40,malnutrition,low,Regents University Of California Los Angeles,2009
+risk factors,237,40,disease,low,"James B. Hunt, Jr. Institute for Educational Leadership and Policy Foundation, Inc.",2004
+hiv,238,40,population,low,Battelle For Kids,2012
+oncology,239,40,cancer,low,"GreatSchools, Inc.",2000
+incidence,240,40,population,low,The University of the State of New York,2012
+*economic development,241,40,finance,low,National Student Clearinghouse Research Center,2005
+diabetic retinopathy,242,40,diabetes,low,Alliance for Education,2003
+outcomes,243,40,heart,low,"The New Teacher Project, Inc.",2007
+homocysteine,244,40,malnutrition,low,Educational Testing Service,2009
+public health,245,40,healthcare,low,Asia Society,2006
+obesity,231,2315,overall,high,,2015
+mortality,232,1168,overall,high,,2015
+diabetes,233,1103,overall,high,,2015
+epidemiology,234,1005,overall,high,,2015
+heart failure,235,758,overall,high,,2015
+cancer,236,721,overall,high,,2015
+inflammation,237,695,overall,high,,2015
+apoptosis,238,630,overall,high,,2015
+diabetes mellitus,239,606,overall,high,,2015
+hypertension,240,557,overall,high,,2015
+prognosis,241,549,overall,high,,2015
+cardiovascular disease,242,520,overall,high,,2015
+risk factors,243,511,overall,high,,2015
+stroke,244,474,overall,high,,2015
+type 2 diabetes,245,457,overall,high,,2015
+breast cancer,246,456,overall,high,,2015
+metabolic syndrome,247,437,overall,high,,2015
+insulin resistance,248,429,overall,high,,2015
+children,249,420,overall,high,,2015
+oxidative stress,250,419,overall,high,,2015
+survival,251,400,overall,high,,2015
+myocardial infarction,252,377,overall,high,,2015
+body mass index,253,364,overall,high,,2015
+pregnancy,254,352,overall,high,,2015
+meta-analysis,255,345,overall,high,,2015
+depression,256,332,overall,high,,2015
+atrial fibrillation,257,324,overall,high,,2015
+malnutrition,258,316,overall,high,,2015
+prevalence,259,314,overall,high,,2015
+quality of life,260,307,overall,high,,2015
+elderly,261,307,overall,high,,2015
+coronary artery disease,262,301,overall,high,,2015
+public health,263,288,overall,high,,2015
+prevention,264,286,overall,high,,2015
+nutrition,265,286,overall,high,,2015
+treatment,266,282,overall,high,,2015
+prostate cancer,267,279,overall,high,,2015
+blood pressure,268,277,overall,high,,2015
+aging,269,277,overall,high,,2015
+outcomes,270,275,overall,high,,2015
+atherosclerosis,271,264,overall,high,,2015
+type 2 diabetes mellitus,272,261,overall,high,,2015
+screening,273,259,overall,high,,2015
+hiv,274,245,overall,high,,2015
+outcome,275,245,overall,high,,2015
+surgery,276,244,overall,high,,2015
+exercise,277,242,overall,high,,2015
+developing countries,278,242,overall,high,,2015
+autophagy,279,240,overall,high,,2015
+physical activity,280,238,overall,high,,2015
+colorectal cancer,281,231,overall,high,,2015
+vitamin d,282,230,overall,high,,2015
+primary care,283,229,overall,high,,2015
+dementia,284,224,overall,high,,2015
+alzheimer's disease,285,224,overall,high,,2015
+mitochondria,286,224,overall,high,,2015
+chronic kidney disease,287,219,overall,high,,2015
+biomarker,288,218,overall,high,,2015
+insulin,289,211,overall,high,,2015
+chemotherapy,290,209,overall,high,,2015
+africa,291,209,overall,high,,2015
+diagnosis,292,206,overall,high,,2015
+education,293,202,overall,high,,2015
+congenital heart disease,294,201,overall,high,,2015
+health,295,198,overall,high,,2015
+diet,296,194,overall,high,,2015
+magnetic resonance imaging,297,189,overall,high,,2015
+biomarkers,298,187,overall,high,,2015
+incidence,299,184,overall,high,,2015
+systematic review,300,183,overall,high,,2015
+echocardiography,301,183,overall,high,,2015
+economic factors,302,183,overall,high,,2015
+lung cancer,303,176,overall,high,,2015
+overweight,304,176,overall,high,,2015
+cardiovascular diseases,305,173,overall,high,,2015
+coronary heart disease,306,166,overall,high,,2015
+type 1 diabetes,307,166,overall,high,,2015
+metabolism,308,164,overall,high,,2015
+genetics,309,163,overall,high,,2015
+complications,310,163,overall,high,,2015
+smoking,311,157,overall,high,,2015
+population,312,155,overall,high,,2015
+infection,313,152,overall,high,,2015
+reactive oxygen species,314,150,overall,high,,2015
+hepatocellular carcinoma,315,150,overall,high,,2015
+angiogenesis,316,148,overall,high,,2015
+bmi,317,147,overall,high,,2015
+risk factor,318,147,overall,high,,2015
+child,319,145,overall,high,,2015
+leptin,320,143,overall,high,,2015
+review,321,139,overall,high,,2015
+mental health,322,138,overall,high,,2015
+asthma,323,137,overall,high,,2015
+adolescents,324,137,overall,high,,2015
+weight loss,325,137,overall,high,,2015
+nursing,326,136,overall,high,,2015
+adipose tissue,327,136,overall,high,,2015
+vaccine,328,135,overall,high,,2015
+bariatric surgery,329,135,overall,high,,2015
+parkinson's disease,330,134,overall,high,,2015
+safety,331,134,overall,high,,2015
+cell death,332,133,overall,high,,2015
+gastric cancer,333,131,overall,high,,2015
+qualitative research,334,129,overall,high,,2015
+cytokines,335,129,overall,high,,2015
+metastasis,336,128,overall,high,,2015
+gender,337,127,overall,high,,2015
+adiponectin,338,127,overall,high,,2015
+pulmonary hypertension,339,127,overall,high,,2015
+health promotion,340,125,overall,high,,2015
+surveillance,341,124,overall,high,,2015
+pediatric,342,124,overall,high,,2015
+percutaneous coronary intervention,343,123,overall,high,,2015
+cardiovascular risk,344,123,overall,high,,2015
+heart,345,122,overall,high,,2015
+pediatrics,346,122,overall,high,,2015
+gene expression,347,118,overall,high,,2015
+demographic factors,348,118,overall,high,,2015
+radiotherapy,349,117,overall,high,,2015
+cognition,350,116,overall,high,,2015
+sudden cardiac death,351,115,overall,high,,2015
+india,352,115,overall,high,,2015
+tuberculosis,353,114,overall,high,,2015
+polymorphism,354,113,overall,high,,2015
+comorbidity,355,113,overall,high,,2015
+palliative care,356,112,overall,high,,2015
+oncology,357,111,overall,high,,2015
+liver,358,111,overall,high,,2015
+immunohistochemistry,359,111,overall,high,,2015
+heart rate,360,111,overall,high,,2015
+management,361,109,overall,high,,2015
+cardiovascular,362,109,overall,high,,2015
+migration,363,109,overall,high,,2015
+melanoma,364,108,overall,high,,2015
+sepsis,365,107,overall,high,,2015
+asia,366,107,overall,high,,2015
+mri,367,107,overall,high,,2015
+nitric oxide,368,107,overall,high,,2015
+morbidity,369,106,overall,high,,2015
+chronic obstructive pulmonary disease,370,106,overall,high,,2015
+clinical trial,371,106,overall,high,,2015
+acute coronary syndrome,372,106,overall,high,,2015
+primary health care,373,105,overall,high,,2015
+risk assessment,374,104,overall,high,,2015
+stress,375,104,overall,high,,2015
+population dynamics,376,102,overall,high,,2015
+risk,377,102,overall,high,,2015
+china,378,102,overall,high,,2015
+pain,379,102,overall,high,,2015
+body composition,380,101,overall,high,,2015
+adolescent,381,101,overall,high,,2015
+epilepsy,382,100,overall,high,,2015
+calcium,383,100,overall,high,,2015
+policy,384,100,overall,high,,2015
+cholesterol,385,100,overall,high,,2015
+anxiety,386,100,overall,high,,2015
+health services,387,99,overall,medium,,2015
+liver transplantation,388,98,overall,medium,,2015
+osteoporosis,389,98,overall,medium,,2015
+death,390,98,overall,medium,,2015
+chronic disease,391,98,overall,medium,,2015
+hospitalization,392,97,overall,medium,,2015
+lipids,393,97,overall,medium,,2015
+cholera,394,97,overall,medium,,2015
+non-alcoholic fatty liver disease,395,96,overall,medium,,2015
+iran,396,95,overall,medium,,2015
+ovarian cancer,397,95,overall,medium,,2015
+metformin,398,95,overall,medium,,2015
+survey,399,94,overall,medium,,2015
+socioeconomic factors,400,94,overall,medium,,2015
+sleep,401,94,overall,medium,,2015
+communication,402,94,overall,medium,,2015
+acute myocardial infarction,403,94,overall,medium,,2015
+socioeconomic status,404,94,overall,medium,,2015
+vaccination,405,93,overall,medium,,2015
+clinical trials,406,93,overall,medium,,2015
+influenza,407,93,overall,medium,,2015
+aged,408,93,overall,medium,,2015
+glucose,409,93,overall,medium,,2015
+cardiomyopathy,410,92,overall,medium,,2015
+cytotoxicity,411,91,overall,medium,,2015
+statins,412,91,overall,medium,,2015
+microrna,413,91,overall,medium,,2015
+proliferation,414,91,overall,medium,,2015
+age,415,90,overall,medium,,2015
+fibrosis,416,90,overall,medium,,2015
+women,417,90,overall,medium,,2015
+immunotherapy,418,89,overall,medium,,2015
+recurrence,419,88,overall,medium,,2015
+epigenetics,420,88,overall,medium,,2015
+obstructive sleep apnea,421,88,overall,medium,,2015
+periodontitis,422,88,overall,medium,,2015
+oral health,423,88,overall,medium,,2015
+schizophrenia,424,87,overall,medium,,2015
+alcohol,425,87,overall,medium,,2015
+patient safety,426,87,overall,medium,,2015
+aortic stenosis,427,87,overall,medium,,2015
+dyslipidemia,428,86,overall,medium,,2015
+waist circumference,429,86,overall,medium,,2015
+hypoxia,430,86,overall,medium,,2015
+environment,431,86,overall,medium,,2015
+intervention,432,85,overall,medium,,2015
+health policy,433,85,overall,medium,,2015
+suicide,434,85,overall,medium,,2015
+hemodialysis,435,85,overall,medium,,2015
+toxicity,436,84,overall,medium,,2015
+nurses,437,84,overall,medium,,2015
+heart transplantation,438,84,overall,medium,,2015
+workforce,439,84,overall,medium,,2015
+cohort study,440,83,overall,medium,,2015
+ultrasound,441,83,overall,medium,,2015
+disability,442,83,overall,medium,,2015
+traumatic brain injury,443,83,overall,medium,,2015
+cirrhosis,444,82,overall,medium,,2015
+nutritional status,445,82,overall,medium,,2015
+kidney,446,82,overall,medium,,2015
+knowledge,447,82,overall,medium,,2015
+oral hygiene,448,82,overall,medium,,2015
+neurodegeneration,449,82,overall,medium,,2015
+neuroprotection,450,81,overall,medium,,2015
+pancreatic cancer,451,81,overall,medium,,2015
+imaging,452,80,overall,medium,,2015
+multiple sclerosis,453,80,overall,medium,,2015
+hyperglycemia,454,80,overall,medium,,2015
+training,455,80,overall,medium,,2015
+critical care,456,80,overall,medium,,2015
+biodegradation,457,80,overall,medium,,2015
+diseases,458,80,overall,medium,,2015
+c-reactive protein,459,79,overall,medium,,2015
+inflammatory bowel disease,460,78,overall,medium,,2015
+diabetic nephropathy,461,78,overall,medium,,2015
+rheumatoid arthritis,462,78,overall,medium,,2015
+innate immunity,463,78,overall,medium,,2015
+rehabilitation,464,77,overall,medium,,2015
+cardiac surgery,465,77,overall,medium,,2015
+randomized controlled trial,466,77,overall,medium,,2015
+infant,467,77,overall,medium,,2015
+pharmacokinetics,468,77,overall,medium,,2015
+older adults,469,76,overall,medium,,2015
+p53,470,76,overall,medium,,2015
+head and neck cancer,471,76,overall,medium,,2015
+pneumonia,472,76,overall,medium,,2015
+therapy,473,75,overall,medium,,2015
+trauma,474,75,overall,medium,,2015
+transplantation,475,75,overall,medium,,2015
+preeclampsia,476,74,overall,medium,,2015
+pulmonary embolism,477,74,overall,medium,,2015
+dna methylation,478,74,overall,medium,,2015
+bladder cancer,479,73,overall,medium,,2015
+quality of care,480,73,overall,medium,,2015
+ethnicity,481,73,overall,medium,,2015
+copd,482,73,overall,medium,,2015
+adherence,483,73,overall,medium,,2015
+cost,484,72,overall,medium,,2015
+quality improvement,485,72,overall,medium,,2015
+development,486,72,overall,medium,,2015
+infection control,487,72,overall,medium,,2015
+anemia,488,72,overall,medium,,2015
+delivery of health care,489,72,overall,medium,,2015
+acute kidney injury,490,71,overall,medium,,2015
+computed tomography,491,71,overall,medium,,2015
+rat,492,71,overall,medium,,2015
+morbid obesity,493,71,overall,medium,,2015
+heart rate variability,494,71,overall,medium,,2015
+lifestyle,495,71,overall,medium,,2015
+systemic lupus erythematosus,496,70,overall,low,,2015
+polycystic ovary syndrome,497,70,overall,low,,2015
+high-fat diet,498,70,overall,low,,2015
+colon cancer,499,69,overall,low,,2015
+hippocampus,500,69,overall,low,,2015
+intensive care unit,501,68,overall,low,,2015
+dialysis,502,68,overall,low,,2015
+alzheimer?€?s disease,503,68,overall,low,,2015
+cervical cancer,504,68,overall,low,,2015
+hand hygiene,505,68,overall,low,,2015
+cohort studies,506,67,overall,low,,2015
+complication,507,67,overall,low,,2015
+hypoglycemia,508,67,overall,low,,2015
+economics,509,66,overall,low,,2015
+guidelines,510,66,overall,low,,2015
+childhood obesity,511,66,overall,low,,2015
+testosterone,512,65,overall,low,,2015
+mass spectrometry,513,65,overall,low,,2015
+treatment outcome,514,65,overall,low,,2015
+brain,515,64,overall,low,,2015
+proteomics,516,64,overall,low,,2015
+evaluation,517,64,overall,low,,2015
+cystic fibrosis,518,64,overall,low,,2015
+arterial stiffness,519,64,overall,low,,2015
+older people,520,64,overall,low,,2015
+europe,521,63,overall,low,,2015
+health-related quality of life,522,63,overall,low,,2015
+adults,523,63,overall,low,,2015
+risk stratification,524,63,overall,low,,2015
+health services research,525,63,overall,low,,2015
+antioxidant,526,63,overall,low,,2015
+homocysteine,527,63,overall,low,,2015
+diabetic retinopathy,528,62,overall,low,,2015
+thrombosis,529,62,overall,low,,2015
+adipokines,530,62,overall,low,,2015

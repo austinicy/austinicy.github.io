@@ -1,0 +1,830 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Global Health Analytics</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="author" content="Zheng Bing Bing" />
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="css/map.css" type="text/css" media="screen"/>
+	<link href="css/mortality.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link href='http://fonts.googleapis.com/css?family=Milonga' rel='stylesheet' type='text/css'>
+
+</head>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+     <script type="text/javascript" language="javascript">
+         $(document).ready(function () {
+
+             $(".hidetext1").click(function () {
+
+                 $(".text1").toggle("slow")
+      
+
+             });
+
+             $(".hidetext2").click(function () {
+
+                 $(".text2").toggle("slow")
+
+
+             });
+
+
+             $(".hidetext3").click(function () {
+
+                 $(".text3").toggle("slow")
+
+
+             });
+
+
+             $(".hidetext4").click(function () {
+
+                 $(".text4").toggle("slow")
+
+
+             });
+
+             $(".hidetext5").click(function () {
+
+                 $(".text5").toggle("slow")
+
+
+             });
+
+             $(".hidetext6").click(function () {
+
+                 $(".text6").toggle("slow")
+
+
+             });
+
+         });
+      </script>
+<body>
+    <div class="container2"> 
+    <!--Navigation -->  
+    <div class ="toppic">
+    <img alt="title" src="images/toppic.png" />
+    </div>
+	<div class="navigation">
+    <div class="nav">
+	<ul>
+  	<li ><a href="index.php">Home</a></li>
+  	<li><a href="workforce.php">Workforce</a></li>
+    <li><a href="disease.php">Disease</a></li>
+    <li><a href="pupmed.html">PubMed</a></li>
+    <li><a href="network.html">Network Diagram</a></li>
+    <li class="active"><a href="ebola3.html">Ebola</a></li>
+	<li><a href="rshiny.html">R Shiny</a></li>
+    <li><a href="aboutus.html">About</a></li>
+	</ul> 
+    </div>
+    </div>
+    </div>
+    
+
+<div id="bigtitle">Ebola Mortality
+    
+    <a href="ebola.html" style="float:right;font-size:20px;">Ebola Cases &nbsp;</a>
+    <a href="ebola2.html" style="float:right; font-size:20px;" />Ebola Mortality &nbsp;</a>
+    <a href="ebola3.html" style="float:right;font-size:20px;">Ebola Overview &nbsp;</a></div>
+    <div id="buttons">
+    <input href="#chart1" class="hidetext1" type="button" value="Guinea"/>
+    <input href="#chart2" class="hidetext2" type="button" value="Liberia"/>
+    <input href="#chart3" class="hidetext3" type="button" value="Sierra Leone"/>
+    <input href="#chart4" class="hidetext4" type="button" value="Nigeria"/>
+    <input href="#chart5" class="hidetext5" type="button" value="West Africa"/>
+    <input href="#chart6" class="hidetext6" type="button" value="Accumulated"/></div>
+	<div id="main">
+    <div id="box">
+        <div class="text1" id="chart1" style="display: none">
+        <h4> Guinea</h4>
+        </div>
+        
+        <div class="text2" id="chart2" style="display: none">
+        <h4> Liberia</h4>
+        </div>  
+        
+        <div class="text3" id="chart3" style="display: none">
+        <h4> Sierra Leone</h4>
+        </div>    
+
+        <div class="text4" id="chart4" style="display: none">
+        <h4> Nigeria</h4>
+        </div>
+
+        <div class="text5" id="chart5" style="display: none">
+        <h4> West Africa</h4>
+        </div>  
+        
+        <div class="text6" id="chart6" style="display: none">
+        <h4> Accumulated</h4>
+        </div>    
+                                          
+        </div>
+        </div>
+    
+    </body>
+    
+</body>
+
+<script src="http://d3js.org/d3.v3.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<script>
+var margin = { top: 0, right: 70, bottom: 30, left: 50 },
+        width = 800 - margin.left - margin.right,
+        height = 270 - margin.top - margin.bottom;
+
+// Guinea
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<p class='hover'>Guinea</p> </br> <strong>Date:</strong> <span style='color:white'>" + d.hover + "</br><strong>Case:</strong> <span style='color:white'>" + d.guineacase;
+  });
+
+var tip1 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<p class='hover'>Guinea</p> <strong>Date:</strong> <span style='color:white'>" + d.hover + "</br><strong>Deaths:</strong> <span style='color:white'>" + d.guineadeath;
+  });
+    var parseDate = d3.time.format("%Y-%m-%d").parse;  
+  
+    var x = d3.time.scale()
+        .range([0, width]);
+
+    var y = d3.scale.linear()
+        .range([height, 0]);
+		
+
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom").ticks(7);
+	
+
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left").ticks(5);
+
+    var line = d3.svg.line()
+        .x(function (d) { return x(d.date); })
+        .y(function (d) { return y(d.guineacase); });
+
+    var line2 = d3.svg.line()
+   	 	.x(function (d) { return x(d.date); })
+    	.y(function (d) { return y(d.guineadeath); });
+		
+    var svg = d3.select("#chart1").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	svg.call(tip).call(tip1);
+	
+    d3.json("Json/ebolamortality.json", function (error, data) {
+        data.forEach(function (d)
+        {
+   		    d.date = parseDate(d.date.toString());
+            d.guineacase  = +d.guineacase;
+            d.guineadeath = +d.guineadeath;
+        });
+
+		x.domain(d3.extent(data, function (d) {
+  		  return d.date;
+		}));
+		
+/* Changed the y-axis range */		
+		y.domain([d3.min(data, function (d) { return(0)}), d3.max(data, function (d) { return(d.guineacase + 5)})]);
+
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        svg.append("text")      // text label for the x axis
+          .attr("x", 340)
+          .attr("y", 270)
+          .style("text-anchor", "middle")
+          .text("Date");
+
+        svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+          .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("Guinea");
+
+		svg.append("path")
+    		.datum(data)
+   			.attr("class", "line")
+   			.style("stroke", "red")
+   		    .attr("d", line(data));
+	
+		svg.append("path")
+   		    .datum(data)
+    		.attr("class", "line")
+			.style("stroke", "black")
+    		.attr("d", line2(data));
+		
+		svg.selectAll('.yaxis1')
+    		.data(data)
+    		.enter()
+    		.append('circle')
+    		.attr('class', 'yaxis1')
+   			.attr('cx', function (datum) {
+    		return x(datum.date)
+			})
+    		.attr('cy', function (datum) {
+    		return y(datum.guineacase)
+			})
+    		.attr('r', 3)
+    		.attr('fill', 'red')
+    		.on('mouseover', tip.show)
+    		.on('mouseout', tip.hide);
+
+			svg.selectAll('.yaxis2')
+    		.data(data)
+    		.enter()
+    		.append('circle')
+    		.attr('class', 'yaxis2')
+    		.attr('cx', function (datum) {
+    		return x(datum.date)
+			})
+    		.attr('cy', function (datum) {
+    		return y(datum.guineadeath)
+			})
+    		.attr('r', 3)
+    		.attr('fill', 'black')
+    		.on('mouseover', tip1.show)
+    		.on('mouseout', tip1.hide);
+    });
+	
+// Liberia	
+var tip2 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<p class='hover'>Liberia</p> </br> <strong>Date:</strong> <span style='color:white'>" + d.hover + "</br><strong>Case:</strong> <span style='color:white'>" + d.liberiacase;
+  });
+
+var tip3 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<p class='hover'>Liberia</p> <strong>Date:</strong> <span style='color:white'>" + d.hover + "</br><strong>Deaths:</strong> <span style='color:white'>" + d.liberiadeath;
+  });
+
+    var line3 = d3.svg.line()
+        .x(function (d) { return x(d.date); })
+        .y(function (d) { return y(d.liberiacase); });
+
+    var line4 = d3.svg.line()
+   	 	.x(function (d) { return x(d.date); })
+    	.y(function (d) { return y(d.liberiadeath); });
+		
+    var svg2 = d3.select("#chart2").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	svg2.call(tip2).call(tip3);
+	
+    d3.json("Json/ebolamortality.json", function (error, data) {
+        data.forEach(function (d)
+        {
+   		    d.date = parseDate(d.date.toString());
+            d.liberiacase  = +d.liberiacase;
+            d.liberiadeath = +d.liberiadeath;
+        });
+
+		x.domain(d3.extent(data, function (d) {
+  		  return d.date;
+		}));
+		
+/* Changed the y-axis range */		
+		y.domain([d3.min(data, function (d) { return(0)}), d3.max(data, function (d) { return(d.liberiacase + 10)})]);
+
+        svg2.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        svg2.append("text")      // text label for the x axis
+          .attr("x", 340)
+          .attr("y", 270)
+          .style("text-anchor", "middle")
+          .text("Date");
+
+        svg2.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+          .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("Liberia");
+
+		svg2.append("path")
+    		.datum(data)
+   			.attr("class", "line")
+   			.style("stroke", "red")
+   		    .attr("d", line3(data));
+	
+		svg2.append("path")
+   		    .datum(data)
+    		.attr("class", "line")
+			.style("stroke", "black")
+    		.attr("d", line4(data));
+		
+		svg2.selectAll('.yaxis1')
+    		.data(data)
+    		.enter()
+    		.append('circle')
+    		.attr('class', 'yaxis1')
+   			.attr('cx', function (datum) {
+    		return x(datum.date)
+			})
+    		.attr('cy', function (datum) {
+    		return y(datum.liberiacase)
+			})
+    		.attr('r', 3)
+    		.attr('fill', 'red')
+    		.on('mouseover', tip2.show)
+    		.on('mouseout', tip2.hide);
+
+			svg2.selectAll('.yaxis2')
+    		.data(data)
+    		.enter()
+    		.append('circle')
+    		.attr('class', 'yaxis2')
+    		.attr('cx', function (datum) {
+    		return x(datum.date)
+			})
+    		.attr('cy', function (datum) {
+    		return y(datum.liberiadeath)
+			})
+    		.attr('r', 3)
+    		.attr('fill', 'black')
+    		.on('mouseover', tip3.show)
+    		.on('mouseout', tip3.hide);
+    });	
+	
+// Sierra Leone
+var tip4 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<p class='hover'>Sierra Leone</p> </br> <strong>Date:</strong> <span style='color:white'>" + d.hover + "</br><strong>Case:</strong> <span style='color:white'>" + d.sierraleonecase;
+  });
+
+var tip5 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<p class='hover'>Sierra Leone</p> <strong>Date:</strong> <span style='color:white'>" + d.hover + "</br><strong>Deaths:</strong> <span style='color:white'>" + d.sierraleonedeath;
+  });
+
+    var line5 = d3.svg.line()
+        .x(function (d) { return x(d.date); })
+        .y(function (d) { return y(d.sierraleonecase); });
+
+    var line6 = d3.svg.line()
+   	 	.x(function (d) { return x(d.date); })
+    	.y(function (d) { return y(d.sierraleonedeath); });
+		
+    var svg3 = d3.select("#chart3").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	svg3.call(tip4).call(tip5);
+	
+    d3.json("Json/ebolamortality.json", function (error, data) {
+        data.forEach(function (d)
+        {
+   		    d.date = parseDate(d.date.toString());
+            d.sierraleonecase  = +d.sierraleonecase;
+            d.sierraleonedeath = +d.sierraleonedeath;
+        });
+
+		x.domain(d3.extent(data, function (d) {
+  		  return d.date;
+		}));
+		
+/* Changed the y-axis range */		
+		y.domain([d3.min(data, function (d) { return(0)}), d3.max(data, function (d) { return(d.sierraleonecase + 5)})]);
+
+        svg3.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        svg3.append("text")      // text label for the x axis
+          .attr("x", 340)
+          .attr("y", 270)
+          .style("text-anchor", "middle")
+          .text("Date");
+
+        svg3.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+          .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("Sierra Leone");
+
+		svg3.append("path")
+    		.datum(data)
+   			.attr("class", "line")
+   			.style("stroke", "red")
+   		    .attr("d", line5(data));
+	
+		svg3.append("path")
+   		    .datum(data)
+    		.attr("class", "line")
+			.style("stroke", "black")
+    		.attr("d", line6(data));
+		
+		svg3.selectAll('.yaxis1')
+    		.data(data)
+    		.enter()
+    		.append('circle')
+    		.attr('class', 'yaxis1')
+   			.attr('cx', function (datum) {
+    		return x(datum.date)
+			})
+    		.attr('cy', function (datum) {
+    		return y(datum.sierraleonecase)
+			})
+    		.attr('r', 3)
+    		.attr('fill', 'red')
+    		.on('mouseover', tip4.show)
+    		.on('mouseout', tip4.hide);
+
+			svg3.selectAll('.yaxis2')
+    		.data(data)
+    		.enter()
+    		.append('circle')
+    		.attr('class', 'yaxis2')
+    		.attr('cx', function (datum) {
+    		return x(datum.date)
+			})
+    		.attr('cy', function (datum) {
+    		return y(datum.sierraleonedeath)
+			})
+    		.attr('r', 3)
+    		.attr('fill', 'black')
+    		.on('mouseover', tip5.show)
+    		.on('mouseout', tip5.hide);
+    });	
+	
+// Nigeria
+var tip6 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<p class='hover'>Nigeria</p> </br> <strong>Date:</strong> <span style='color:white'>" + d.hover + "</br><strong>Case:</strong> <span style='color:white'>" + d.nigeriacase;
+  });
+
+var tip7 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<p class='hover'>Nigeria</p> <strong>Date:</strong> <span style='color:white'>" + d.hover + "</br><strong>Deaths:</strong> <span style='color:white'>" + d.nigeriadeath;
+  });
+
+    var line7 = d3.svg.line()
+        .x(function (d) { return x(d.date); })
+        .y(function (d) { return y(d.nigeriacase); });
+
+    var line8 = d3.svg.line()
+   	 	.x(function (d) { return x(d.date); })
+    	.y(function (d) { return y(d.nigeriadeath); });
+		
+    var svg4 = d3.select("#chart4").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	svg4.call(tip6).call(tip7);
+	
+    d3.json("Json/ebolamortality.json", function (error, data) {
+        data.forEach(function (d)
+        {
+   		    d.date = parseDate(d.date.toString());
+            d.nigeriacase  = +d.nigeriacase;
+            d.nigeriadeath = +d.nigeriadeath;
+        });
+
+		x.domain(d3.extent(data, function (d) {
+  		  return d.date;
+		}));
+		
+/* Changed the y-axis range */		
+		y.domain([d3.min(data, function (d) { return(0)}), d3.max(data, function (d) { return(d.nigeriacase + 2)})]);
+
+        svg4.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        svg4.append("text")      // text label for the x axis
+          .attr("x", 340)
+          .attr("y", 270)
+          .style("text-anchor", "middle")
+          .text("Date");
+
+        svg4.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+          .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("Nigeria");
+
+		svg4.append("path")
+    		.datum(data)
+   			.attr("class", "line")
+   			.style("stroke", "red")
+   		    .attr("d", line7(data));
+	
+		svg4.append("path")
+   		    .datum(data)
+    		.attr("class", "line")
+			.style("stroke", "black")
+    		.attr("d", line8(data));
+		
+		svg4.selectAll('.yaxis1')
+    		.data(data)
+    		.enter()
+    		.append('circle')
+    		.attr('class', 'yaxis1')
+   			.attr('cx', function (datum) {
+    		return x(datum.date)
+			})
+    		.attr('cy', function (datum) {
+    		return y(datum.nigeriacase)
+			})
+    		.attr('r', 3)
+    		.attr('fill', 'red')
+    		.on('mouseover', tip6.show)
+    		.on('mouseout', tip6.hide);
+
+			svg4.selectAll('.yaxis2')
+    		.data(data)
+    		.enter()
+    		.append('circle')
+    		.attr('class', 'yaxis2')
+    		.attr('cx', function (datum) {
+    		return x(datum.date)
+			})
+    		.attr('cy', function (datum) {
+    		return y(datum.nigeriadeath)
+			})
+    		.attr('r', 3)
+    		.attr('fill', 'black')
+    		.on('mouseover', tip7.show)
+    		.on('mouseout', tip7.hide);
+    });		
+	
+// West Africa
+var tip8 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<p class='hover'>West Africa</p> </br> <strong>Date:</strong> <span style='color:white'>" + d.hover + "</br><strong>Case:</strong> <span style='color:white'>" + d.westafricacase;
+  });
+
+var tip9 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<p class='hover'>West Africa</p> <strong>Date:</strong> <span style='color:white'>" + d.hover + "</br><strong>Deaths:</strong> <span style='color:white'>" + d.westafricadeath;
+  });
+
+    var line9 = d3.svg.line()
+        .x(function (d) { return x(d.date); })
+        .y(function (d) { return y(d.westafricacase); });
+
+    var line10 = d3.svg.line()
+   	 	.x(function (d) { return x(d.date); })
+    	.y(function (d) { return y(d.westafricadeath); });
+		
+    var svg5 = d3.select("#chart5").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	svg5.call(tip8).call(tip9);
+	
+    d3.json("Json/ebolamortality.json", function (error, data) {
+        data.forEach(function (d)
+        {
+   		    d.date = parseDate(d.date.toString());
+            d.westafricacase  = +d.westafricacase;
+            d.westafricadeath = +d.westafricadeath;
+        });
+
+		x.domain(d3.extent(data, function (d) {
+  		  return d.date;
+		}));
+		
+/* Changed the y-axis range */		
+		y.domain([d3.min(data, function (d) { return(0)}), d3.max(data, function (d) { return(d.westafricacase + 10)})]);
+
+        svg5.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        svg5.append("text")      // text label for the x axis
+          .attr("x", 340)
+          .attr("y", 270)
+          .style("text-anchor", "middle")
+          .text("Date");
+
+        svg5.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+          .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("West Africa");
+
+		svg5.append("path")
+    		.datum(data)
+   			.attr("class", "line")
+   			.style("stroke", "red")
+   		    .attr("d", line9(data));
+	
+		svg5.append("path")
+   		    .datum(data)
+    		.attr("class", "line")
+			.style("stroke", "black")
+    		.attr("d", line10(data));
+		
+		svg5.selectAll('.yaxis1')
+    		.data(data)
+    		.enter()
+    		.append('circle')
+    		.attr('class', 'yaxis1')
+   			.attr('cx', function (datum) {
+    		return x(datum.date)
+			})
+    		.attr('cy', function (datum) {
+    		return y(datum.westafricacase)
+			})
+    		.attr('r', 3)
+    		.attr('fill', 'red')
+    		.on('mouseover', tip8.show)
+    		.on('mouseout', tip8.hide);
+
+			svg5.selectAll('.yaxis2')
+    		.data(data)
+    		.enter()
+    		.append('circle')
+    		.attr('class', 'yaxis2')
+    		.attr('cx', function (datum) {
+    		return x(datum.date)
+			})
+    		.attr('cy', function (datum) {
+    		return y(datum.westafricadeath)
+			})
+    		.attr('r', 3)
+    		.attr('fill', 'black')
+    		.on('mouseover', tip9.show)
+    		.on('mouseout', tip9.hide);
+    });		
+	
+// Accumulated
+var tip10 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<p class='hover'>Accumulated</p> </br> <strong>Date:</strong> <span style='color:white'>" + d.hover + "</br><strong>Case:</strong> <span style='color:white'>" + d.accumulatedcase;
+  });
+
+var tip11 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<p class='hover'>Accumulated</p> <strong>Date:</strong> <span style='color:white'>" + d.hover + "</br><strong>Deaths:</strong> <span style='color:white'>" + d.accumulateddeath;
+  });
+
+    var line11 = d3.svg.line()
+        .x(function (d) { return x(d.date); })
+        .y(function (d) { return y(d.accumulatedcase); });
+
+    var line12 = d3.svg.line()
+   	 	.x(function (d) { return x(d.date); })
+    	.y(function (d) { return y(d.accumulateddeath); });
+		
+    var svg6 = d3.select("#chart6").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	svg6.call(tip10).call(tip11);
+	
+    d3.json("Json/ebolamortality.json", function (error, data) {
+        data.forEach(function (d)
+        {
+   		    d.date = parseDate(d.date.toString());
+            d.accumulatedcase  = +d.accumulatedcase;
+            d.accumulateddeath = +d.accumulateddeath;
+        });
+
+		x.domain(d3.extent(data, function (d) {
+  		  return d.date;
+		}));
+		
+/* Changed the y-axis range */		
+		y.domain([d3.min(data, function (d) { return(0)}), d3.max(data, function (d) { return(d.accumulatedcase + 50)})]);
+
+        svg6.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        svg6.append("text")      // text label for the x axis
+          .attr("x", 340)
+          .attr("y", 270)
+          .style("text-anchor", "middle")
+          .text("Date");
+
+        svg6.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+          .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("Accumulated");
+
+		svg6.append("path")
+    		.datum(data)
+   			.attr("class", "line")
+   			.style("stroke", "red")
+   		    .attr("d", line11(data));
+	
+		svg6.append("path")
+   		    .datum(data)
+    		.attr("class", "line")
+			.style("stroke", "black")
+    		.attr("d", line12(data));
+		
+		svg6.selectAll('.yaxis1')
+    		.data(data)
+    		.enter()
+    		.append('circle')
+    		.attr('class', 'yaxis1')
+   			.attr('cx', function (datum) {
+    		return x(datum.date)
+			})
+    		.attr('cy', function (datum) {
+    		return y(datum.accumulatedcase)
+			})
+    		.attr('r', 3)
+    		.attr('fill', 'red')
+    		.on('mouseover', tip10.show)
+    		.on('mouseout', tip10.hide);
+
+			svg6.selectAll('.yaxis2')
+    		.data(data)
+    		.enter()
+    		.append('circle')
+    		.attr('class', 'yaxis2')
+    		.attr('cx', function (datum) {
+    		return x(datum.date)
+			})
+    		.attr('cy', function (datum) {
+    		return y(datum.accumulateddeath)
+			})
+    		.attr('r', 3)
+    		.attr('fill', 'black')
+    		.on('mouseover', tip11.show)
+    		.on('mouseout', tip11.hide);
+    });			
+</script>
+</html>

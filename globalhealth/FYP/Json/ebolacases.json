@@ -1,0 +1,5 @@
+[{"countryName":"Guinea","newcases":"10","confirmedcases":"351","probablecases":"133","suspectcases":"11","totalcases":"495","newdeaths":"5","confirmeddeaths":"228","probabledeaths":"133","suspectdeaths":"2","totaldeaths":"363"},
+{"countryName":"Liberia","newcases":"48","confirmedcases":"143","probablecases":"252","suspectcases":"121","totalcases":"516","newdeaths":"27","confirmeddeaths":"128","probabledeaths":"110","suspectdeaths":"44","totaldeaths":"282"},
+{"countryName":"Nigeria","newcases":"5","confirmedcases":"0","probablecases":"2","suspectcases":"7","totalcases":"9","newdeaths":"0","confirmeddeaths":"0","probabledeaths":"1","suspectdeaths":"0","totaldeaths":"1"},
+{"countryName":"Sierra Leone","newcases":"45","confirmedcases":"576","probablecases":"49","suspectcases":"66","totalcases":"691","newdeaths":"13","confirmeddeaths":"247","probabledeaths":"34","suspectdeaths":"5","totaldeaths":"286"},
+{"countryName":"Total","newcases":"108","confirmedcases":"1070","probablecases":"436","suspectcases":"205","totalcases":"1711","newdeaths":"45","confirmeddeaths":"603","probabledeaths":"278","suspectdeaths":"51","totaldeaths":"932"}]

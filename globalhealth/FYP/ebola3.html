@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Global Health Analytics</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="author" content="Zheng Bing Bing" />
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="css/map.css" type="text/css" media="screen"/>
+	<link href="css/cases.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link href='http://fonts.googleapis.com/css?family=Milonga' rel='stylesheet' type='text/css'>
+
+<style>
+h4 {
+  text-align: center;
+}
+table {
+  width: 1300px;
+  margin-left: 25px;
+}
+tr {
+  text-align: center;
+}
+th {
+  border: 1px solid black;
+}
+td {
+  border: 1px solid black;
+}
+</style>
+
+</head>	
+<body>
+    <div class="container2"> 
+    <!--Navigation -->  
+    <div class ="toppic">
+    <img alt="title" src="images/toppic.png" />
+    </div>
+	<div class="navigation">
+    <div class="nav">
+	<ul>
+  	<li ><a href="index.php">Home</a></li>
+  	<li><a href="workforce.php">Workforce</a></li>
+    <li><a href="disease.php">Disease</a></li>
+    <li><a href="pupmed.html">PubMed</a></li>
+    <li><a href="network.html">Network Diagram</a></li>
+    <li class="active"><a href="ebola3.html">Ebola</a></li>
+	<li><a href="rshiny.html">R Shiny</a></li>
+    <li><a href="aboutus.html">About</a></li>
+	</ul> 
+    </div>
+    </div>
+    </div>
+    
+   <div id="bigtitle">Ebola Overview
+    
+    <a href="ebola.html" style="float:right;font-size:20px;">Ebola Cases &nbsp;</a>
+    <a href="ebola2.html" style="float:right; font-size:20px;" />Ebola Mortality &nbsp;</a>
+    <a href="ebola3.html" style="float:right;font-size:20px;">Ebola Overview &nbsp;</a></div>
+   <div id="chartoverview">
+</div>
+   <script src="http://d3js.org/d3.v3.js"></script>
+<script>
+    d3.json('Json/ebolaoverview.json', function (error, data) {
+
+        function tabulate(data, columns) {
+            var table = d3.select('#chartoverview').append('table')
+            var thead = table.append('thead')
+            var tbody = table.append('tbody');
+
+            // append the header row
+            thead.append('tr')
+              .selectAll('th')
+              .data(columns).enter()
+              .append('th')
+                .text(function (column) { return column; });
+
+            // create a row for each object in the data
+            var rows = tbody.selectAll('tr')
+              .data(data)
+              .enter()
+              .append('tr');
+
+            // create a cell in each row for each column
+            var cells = rows.selectAll('td')
+              .data(function (row) {
+                  return columns.map(function (column) {
+                      return { column: column, value: row[column] };
+                  });	
+              })
+              .enter()
+              .append('td')
+                .text(function (d) { return d.value; });
+
+            return table;
+        }
+
+        // render the table(s)
+        tabulate(data, ['Year', 'Country', 'Ebolavirus_Species', 'Cases', 'Deaths', 'Case_Fatality']); // 2 column table
+
+    });		
+</script>
+    </body>
+
+<script src="http://d3js.org/d3.v3.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<script>
+
+</script>
+</html>

@@ -1,0 +1,764 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Global Health Analytics</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="author" content="Zheng Bing Bing" />
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="css/map.css" type="text/css" media="screen"/>
+	<link href="css/cases.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link href='http://fonts.googleapis.com/css?family=Milonga' rel='stylesheet' type='text/css'>
+
+
+</head>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+
+     $(".hidetext1").click(function () {
+
+         $(".text1").toggle("slow")
+      
+
+     });
+
+
+            $(".hidetext2").click(function () {
+
+                $(".text2").toggle("slow")
+
+
+            });
+
+
+            $(".hidetext3").click(function () {
+
+                $(".text3").toggle("slow")
+
+
+            });
+
+
+            $(".hidetext4").click(function () {
+
+                $(".text4").toggle("slow")
+
+
+            });
+
+
+
+            $(".hidetext5").click(function () {
+
+                $(".text5").toggle("slow")
+
+
+            });
+
+
+
+            $(".hidetext6").click(function () {
+
+                $(".text6").toggle("slow")
+
+
+            });
+
+
+            $(".hidetext7").click(function () {
+
+                $(".text7").toggle("slow")
+
+
+            });
+
+
+
+            $(".hidetext8").click(function () {
+
+                $(".text8").toggle("slow")
+
+
+            });
+
+
+            $(".hidetext9").click(function () {
+
+                $(".text9").toggle("slow")
+
+
+            });
+
+
+            $(".hidetext10").click(function () {
+
+                $(".text10").toggle("slow")
+
+
+            });
+
+        });
+    </script>
+
+<body>
+    <div class="container2"> 
+    <!--Navigation -->  
+    <div class ="toppic">
+    <img alt="title" src="images/toppic.png" />
+    </div>
+	<div class="navigation">
+    <div class="nav">
+	<ul>
+  	<li><a href="index.html" >Home</a></li>
+  	<li><a href="workforce.html">Workforce</a></li>
+    <li><a href="disease.html">Disease</a></li>
+    <li><a href="pupmed.html">PubMed</a></li>
+    <li><a href="network.html">Network Diagram</a></li>
+    <li class="active"><a href="ebola3.html">Ebola</a></li>
+	<li><a href="rshiny.html">R Shiny</a></li>
+    <li><a href="aboutus.html">About</a></li>
+	</ul> 
+    </div>
+    </div>
+    </div>
+    
+   <div id="bigtitle">Ebola Cases
+    
+    <a href="ebola.html" style="float:right;font-size:20px;">Ebola Cases &nbsp;</a>
+    <a href="ebola2.html" style="float:right; font-size:20px;" />Ebola Mortality &nbsp;</a>
+    <a href="ebola3.html" style="float:right;font-size:20px;">Ebola Overview &nbsp;</a></div>
+    <div id="buttons">
+    <input href="#chart1" class="hidetext1" type="button" value="New Cases" />
+    <input href="#chart2" class="hidetext2" type="button" value="Confirmed Cases" /> 
+    <input href="#chart3" class="hidetext3" type="button" value="Probable Cases" /> 
+    <input href="#chart4" class="hidetext4" type="button" value="Suspect Cases" /> 
+    <input href="#chart5" class="hidetext5" type="button" value="Total Cases" /> 
+    <input href="#chart6" class="hidetext6" type="button" value="New Deaths" /> 
+    <input href="#chart7" class="hidetext7" type="button" value="Confirmed Deaths" /> 
+    <input href="#chart8" class="hidetext8" type="button" value="Probable Deaths" /> 
+    <input href="#chart9" class="hidetext9" type="button" value="Suspect Deaths" /> 
+    <input href="#chart10" class="hidetext10" type="button" value="Total Deaths" /> </div>
+<div id="main">
+<div id="box">
+        <div class="text1" id="chart1" style="display: none">
+        <h4> Ebola New Cases</h4>
+        </div>
+        
+        <div class="text2" id="chart2" style="display: none">
+        <h4> Ebola Confirmed Cases</h4>
+        </div>        
+        
+        <div class="text3" id="chart3" style="display: none">
+        <h4> Ebola Probable Cases</h4>
+        </div>
+        
+        <div class="text4" id="chart4" style="display: none">
+        <h4> Ebola Suspect Cases</h4>
+        </div>        
+        
+        <div class="text5" id="chart5" style="display: none">
+        <h4> Ebola Total Cases</h4>
+        </div> 
+
+        <div class="text6" id="chart6" style="display: none">
+        <h4> Ebola New Deaths</h4>
+        </div>    
+        
+        <div class="text7" id="chart7" style="display: none">
+        <h4> Ebola Confirmed Deaths</h4>
+        </div>    
+        
+        <div class="text8" id="chart8" style="display: none">
+        <h4> Ebola Probable Deaths</h4>
+        </div>
+        
+        <div class="text9" id="chart9" style="display: none">
+        <h4> Ebola Suspect Deaths</h4>
+        </div>
+        
+        <div class="text10" id="chart10" style="display: none">
+        <h4> Ebola Total Deaths</h4>
+        </div>   
+        </div>  
+        </div>                               
+	
+    </body>
+
+<script src="http://d3js.org/d3.v3.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<script>
+
+var margin = {top: 40, right: 80, bottom: 80, left: 150},
+    width = 550 - margin.left - margin.right,
+    height = 250 - margin.top - margin.bottom;
+
+var xbarchart = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var ybarchart = d3.scale.linear().range([height, 0]);
+
+var xAxisbarchart = d3.svg.axis()
+    .scale(xbarchart)
+    .orient("bottom");
+
+
+// create left yAxis
+var yAxisLeft = d3.svg.axis().scale(ybarchart).ticks(5).orient("left");
+// create right yAxis
+
+// New Cases
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong></strong> <span style='color:white'>" + d.countryName + "</br><strong>New Cases:</strong> <span style='color:white'>" + d.newcases + "</span>";
+  })
+  
+var svg = d3.select("#chart1").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("class", "graph")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+svg.call(tip);
+
+d3.json("Json/ebolacases.json", function(error, data) {
+  xbarchart.domain(data.map(function(d) { return d.countryName; }));
+  ybarchart.domain([0, d3.max(data, function (d) { return 110; })]);
+  
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxisbarchart);
+
+  svg.append("g")
+	  .attr("class", "y axis axisLeft")
+	  .attr("transform", "translate(0,0)")
+	  .call(yAxisLeft)
+	.append("text")
+	  .attr("y", 35)
+	  .attr("dy", "-2em")
+       .attr("transform", "rotate(-90)")
+	  .style("text-anchor", "end")
+	  .text("New Cases");
+
+  bars = svg.selectAll(".bar").data(data).enter();
+
+  bars.append("rect")
+      .attr("class", "bar1")
+      .attr("x", function (d) { return xbarchart(d.countryName); })
+      .attr("width", xbarchart.rangeBand())
+      .attr("y", function (d) { return ybarchart(d.newcases); })
+	  .attr("height", function (d, i, j) { return height - ybarchart(d.newcases); })
+          .on('mouseover', tip.show)
+          .on('mouseout', tip.hide)
+		  
+});
+
+function type(d) {
+    d.newcases = +d.newcases;
+  return d;
+}
+
+// Confirmed Cases
+var tip2 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong></strong> <span style='color:white'>" + d.countryName + "</br><strong>Confirmed Cases:</strong> <span style='color:white'>" + d.confirmedcases + "</span>";
+  })
+  
+var svg2 = d3.select("#chart2").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("class", "graph")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+svg2.call(tip2);
+
+d3.json("Json/ebolacases.json", function(error, data) {
+  xbarchart.domain(data.map(function(d) { return d.countryName; }));
+  ybarchart.domain([0, d3.max(data, function (d) { return 1080; })]);
+  
+  svg2.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxisbarchart);
+
+  svg2.append("g")
+	  .attr("class", "y axis axisLeft")
+	  .attr("transform", "translate(0,0)")
+	  .call(yAxisLeft)
+	.append("text")
+	  .attr("y", 35)
+	  .attr("dy", "-2em")
+       .attr("transform", "rotate(-90)")
+	  .style("text-anchor", "end")
+	  .text("Confirmed Cases");
+
+  bars = svg2.selectAll(".bar").data(data).enter();
+
+  bars.append("rect")
+      .attr("class", "bar1")
+      .attr("x", function (d) { return xbarchart(d.countryName); })
+      .attr("width", xbarchart.rangeBand())
+      .attr("y", function (d) { return ybarchart(d.confirmedcases); })
+	  .attr("height", function (d, i, j) { return height - ybarchart(d.confirmedcases); })
+          .on('mouseover', tip2.show)
+          .on('mouseout', tip2.hide)
+		  
+});
+
+function type(d) {
+    d.confirmedcases = +d.confirmedcases;
+  return d;
+}
+
+// Probable Cases
+var tip3 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong></strong> <span style='color:white'>" + d.countryName + "</br><strong>Probable Cases:</strong> <span style='color:white'>" + d.probablecases + "</span>";
+  })
+  
+var svg3 = d3.select("#chart3").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("class", "graph")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+svg3.call(tip3);
+
+d3.json("Json/ebolacases.json", function(error, data) {
+  xbarchart.domain(data.map(function(d) { return d.countryName; }));
+  ybarchart.domain([0, d3.max(data, function (d) { return 450; })]);
+  
+  svg3.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxisbarchart);
+
+  svg3.append("g")
+	  .attr("class", "y axis axisLeft")
+	  .attr("transform", "translate(0,0)")
+	  .call(yAxisLeft)
+	.append("text")
+	  .attr("y", 35)
+	  .attr("dy", "-2em")
+       .attr("transform", "rotate(-90)")
+	  .style("text-anchor", "end")
+	  .text("Probable Cases");
+
+  bars = svg3.selectAll(".bar").data(data).enter();
+
+  bars.append("rect")
+      .attr("class", "bar1")
+      .attr("x", function (d) { return xbarchart(d.countryName); })
+      .attr("width", xbarchart.rangeBand())
+      .attr("y", function (d) { return ybarchart(d.probablecases); })
+	  .attr("height", function (d, i, j) { return height - ybarchart(d.probablecases); })
+          .on('mouseover', tip3.show)
+          .on('mouseout', tip3.hide)
+		  
+});
+
+function type(d) {
+    d.probablecases = +d.probablecases;
+  return d;
+}
+
+// Suspect Cases
+var tip4 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong></strong> <span style='color:white'>" + d.countryName + "</br><strong>Suspect Cases:</strong> <span style='color:white'>" + d.suspectcases + "</span>";
+  })
+  
+var svg4 = d3.select("#chart4").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("class", "graph")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+svg4.call(tip4);
+
+d3.json("Json/ebolacases.json", function(error, data) {
+  xbarchart.domain(data.map(function(d) { return d.countryName; }));
+  ybarchart.domain([0, d3.max(data, function (d) { return 210; })]);
+  
+  svg4.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxisbarchart);
+
+  svg4.append("g")
+	  .attr("class", "y axis axisLeft")
+	  .attr("transform", "translate(0,0)")
+	  .call(yAxisLeft)
+	.append("text")
+	  .attr("y", 35)
+	  .attr("dy", "-2em")
+       .attr("transform", "rotate(-90)")
+	  .style("text-anchor", "end")
+	  .text("Suspect Cases");
+
+  bars = svg4.selectAll(".bar").data(data).enter();
+
+  bars.append("rect")
+      .attr("class", "bar1")
+      .attr("x", function (d) { return xbarchart(d.countryName); })
+      .attr("width", xbarchart.rangeBand())
+      .attr("y", function (d) { return ybarchart(d.suspectcases); })
+	  .attr("height", function (d, i, j) { return height - ybarchart(d.suspectcases); })
+          .on('mouseover', tip4.show)
+          .on('mouseout', tip4.hide)
+		  
+});
+
+function type(d) {
+    d.suspectcases = +d.suspectcases;
+  return d;
+}
+
+// Total Cases
+var tip5 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong></strong> <span style='color:white'>" + d.countryName + "</br><strong>Total Cases:</strong> <span style='color:white'>" + d.totalcases + "</span>";
+  })
+  
+var svg5 = d3.select("#chart5").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("class", "graph")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+svg5.call(tip5);
+
+d3.json("Json/ebolacases.json", function(error, data) {
+  xbarchart.domain(data.map(function(d) { return d.countryName; }));
+  ybarchart.domain([0, d3.max(data, function (d) { return 1720; })]);
+  
+  svg5.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxisbarchart);
+
+  svg5.append("g")
+	  .attr("class", "y axis axisLeft")
+	  .attr("transform", "translate(0,0)")
+	  .call(yAxisLeft)
+	.append("text")
+	  .attr("y", 35)
+	  .attr("dy", "-2em")
+       .attr("transform", "rotate(-90)")
+	  .style("text-anchor", "end")
+	  .text("Total Cases");
+
+  bars = svg5.selectAll(".bar").data(data).enter();
+
+  bars.append("rect")
+      .attr("class", "bar1")
+      .attr("x", function (d) { return xbarchart(d.countryName); })
+      .attr("width", xbarchart.rangeBand())
+      .attr("y", function (d) { return ybarchart(d.totalcases); })
+	  .attr("height", function (d, i, j) { return height - ybarchart(d.totalcases); })
+          .on('mouseover', tip5.show)
+          .on('mouseout', tip5.hide)
+		  
+});
+
+function type(d) {
+    d.totalcases = +d.totalcases;
+  return d;
+}
+
+// New Deaths
+var tip6 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong></strong> <span style='color:white'>" + d.countryName + "</br><strong>New Deaths:</strong> <span style='color:white'>" + d.newdeaths + "</span>";
+  })
+  
+var svg6 = d3.select("#chart6").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("class", "graph")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+svg6.call(tip6);
+
+d3.json("Json/ebolacases.json", function(error, data) {
+  xbarchart.domain(data.map(function(d) { return d.countryName; }));
+  ybarchart.domain([0, d3.max(data, function (d) { return 50; })]);
+  
+  svg6.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxisbarchart);
+
+  svg6.append("g")
+	  .attr("class", "y axis axisLeft")
+	  .attr("transform", "translate(0,0)")
+	  .call(yAxisLeft)
+	.append("text")
+	  .attr("y", 35)
+	  .attr("dy", "-2em")
+       .attr("transform", "rotate(-90)")
+	  .style("text-anchor", "end")
+	  .text("New Deaths");
+
+  bars = svg6.selectAll(".bar").data(data).enter();
+
+  bars.append("rect")
+      .attr("class", "bar1")
+      .attr("x", function (d) { return xbarchart(d.countryName); })
+      .attr("width", xbarchart.rangeBand())
+      .attr("y", function (d) { return ybarchart(d.newdeaths); })
+	  .attr("height", function (d, i, j) { return height - ybarchart(d.newdeaths); })
+          .on('mouseover', tip6.show)
+          .on('mouseout', tip6.hide)
+		  
+});
+
+function type(d) {
+    d.newdeaths = +d.newdeaths;
+  return d;
+}
+
+// Confirmed Deaths
+var tip7 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong></strong> <span style='color:white'>" + d.countryName + "</br><strong>Confirmed Deaths:</strong> <span style='color:white'>" + d.confirmeddeaths + "</span>";
+  })
+  
+var svg7 = d3.select("#chart7").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("class", "graph")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+svg7.call(tip7);
+
+d3.json("Json/ebolacases.json", function(error, data) {
+  xbarchart.domain(data.map(function(d) { return d.countryName; }));
+  ybarchart.domain([0, d3.max(data, function (d) { return 610; })]);
+  
+  svg7.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxisbarchart);
+
+  svg7.append("g")
+	  .attr("class", "y axis axisLeft")
+	  .attr("transform", "translate(0,0)")
+	  .call(yAxisLeft)
+	.append("text")
+	  .attr("y", 35)
+	  .attr("dy", "-2em")
+       .attr("transform", "rotate(-90)")
+	  .style("text-anchor", "end")
+	  .text("Confirmed Deaths");
+
+  bars = svg7.selectAll(".bar").data(data).enter();
+
+  bars.append("rect")
+      .attr("class", "bar1")
+      .attr("x", function (d) { return xbarchart(d.countryName); })
+      .attr("width", xbarchart.rangeBand())
+      .attr("y", function (d) { return ybarchart(d.confirmeddeaths); })
+	  .attr("height", function (d, i, j) { return height - ybarchart(d.confirmeddeaths); })
+          .on('mouseover', tip7.show)
+          .on('mouseout', tip7.hide)
+		  
+});
+
+function type(d) {
+    d.confirmeddeaths = +d.confirmeddeaths;
+  return d;
+}
+
+// Probable Deaths
+var tip8 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong></strong> <span style='color:white'>" + d.countryName + "</br><strong>Probable Deaths:</strong> <span style='color:white'>" + d.probabledeaths + "</span>";
+  })
+  
+var svg8 = d3.select("#chart8").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("class", "graph")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+svg8.call(tip8);
+
+d3.json("Json/ebolacases.json", function(error, data) {
+  xbarchart.domain(data.map(function(d) { return d.countryName; }));
+  ybarchart.domain([0, d3.max(data, function (d) { return 280; })]);
+  
+  svg8.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxisbarchart);
+
+  svg8.append("g")
+	  .attr("class", "y axis axisLeft")
+	  .attr("transform", "translate(0,0)")
+	  .call(yAxisLeft)
+	.append("text")
+	  .attr("y", 35)
+	  .attr("dy", "-2em")
+       .attr("transform", "rotate(-90)")
+	  .style("text-anchor", "end")
+	  .text("Probable Deaths");
+
+  bars = svg8.selectAll(".bar").data(data).enter();
+
+  bars.append("rect")
+      .attr("class", "bar1")
+      .attr("x", function (d) { return xbarchart(d.countryName); })
+      .attr("width", xbarchart.rangeBand())
+      .attr("y", function (d) { return ybarchart(d.probabledeaths); })
+	  .attr("height", function (d, i, j) { return height - ybarchart(d.probabledeaths); })
+          .on('mouseover', tip8.show)
+          .on('mouseout', tip8.hide)
+		  
+});
+
+function type(d) {
+    d.probabledeaths = +d.probabledeaths;
+  return d;
+}
+
+// Suspect Deaths
+var tip9 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong></strong> <span style='color:white'>" + d.countryName + "</br><strong>Suspect Deaths:</strong> <span style='color:white'>" + d.suspectdeaths + "</span>";
+  })
+  
+var svg9 = d3.select("#chart9").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("class", "graph")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+svg9.call(tip9);
+
+d3.json("Json/ebolacases.json", function(error, data) {
+  xbarchart.domain(data.map(function(d) { return d.countryName; }));
+  ybarchart.domain([0, d3.max(data, function (d) { return 60; })]);
+  
+  svg9.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxisbarchart);
+
+  svg9.append("g")
+	  .attr("class", "y axis axisLeft")
+	  .attr("transform", "translate(0,0)")
+	  .call(yAxisLeft)
+	.append("text")
+	  .attr("y", 35)
+	  .attr("dy", "-2em")
+       .attr("transform", "rotate(-90)")
+	  .style("text-anchor", "end")
+	  .text("Suspect Deaths");
+
+  bars = svg9.selectAll(".bar").data(data).enter();
+
+  bars.append("rect")
+      .attr("class", "bar1")
+      .attr("x", function (d) { return xbarchart(d.countryName); })
+      .attr("width", xbarchart.rangeBand())
+      .attr("y", function (d) { return ybarchart(d.suspectdeaths); })
+	  .attr("height", function (d, i, j) { return height - ybarchart(d.suspectdeaths); })
+          .on('mouseover', tip9.show)
+          .on('mouseout', tip9.hide)
+		  
+});
+
+function type(d) {
+    d.suspectdeaths = +d.suspectdeaths;
+  return d;
+}
+
+// Total Deaths
+var tip10 = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong></strong> <span style='color:white'>" + d.countryName + "</br><strong>Total Deaths:</strong> <span style='color:white'>" + d.totaldeaths + "</span>";
+  })
+  
+var svg10 = d3.select("#chart10").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("class", "graph")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+svg10.call(tip10);
+
+d3.json("Json/ebolacases.json", function(error, data) {
+  xbarchart.domain(data.map(function(d) { return d.countryName; }));
+  ybarchart.domain([0, d3.max(data, function (d) { return 950; })]);
+  
+  svg10.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxisbarchart);
+
+  svg10.append("g")
+	  .attr("class", "y axis axisLeft")
+	  .attr("transform", "translate(0,0)")
+	  .call(yAxisLeft)
+	.append("text")
+	  .attr("y", 35)
+	  .attr("dy", "-2em")
+       .attr("transform", "rotate(-90)")
+	  .style("text-anchor", "end")
+	  .text("Total Deaths");
+
+  bars = svg10.selectAll(".bar").data(data).enter();
+
+  bars.append("rect")
+      .attr("class", "bar1")
+      .attr("x", function (d) { return xbarchart(d.countryName); })
+      .attr("width", xbarchart.rangeBand())
+      .attr("y", function (d) { return ybarchart(d.totaldeaths); })
+	  .attr("height", function (d, i, j) { return height - ybarchart(d.totaldeaths); })
+          .on('mouseover', tip10.show)
+          .on('mouseout', tip10.hide)
+		  
+});
+
+function type(d) {
+    d.totaldeaths = +d.totaldeaths;
+  return d;
+}
+</script>
+</html>

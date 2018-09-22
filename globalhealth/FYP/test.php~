@@ -1,0 +1,44 @@
+<?php
+echo "starting";
+// Connecting, selecting database
+    $username = "root"; 
+    $password = "training";   
+    $host = "localhost";
+    $database="test";
+
+    $server = mysql_connect($host, $user, $password);
+    $connection = mysql_select_db($database, $server);
+
+    $myquery = "
+    select * from seconddb where country = 'Singapore' and role =
+'physicians';
+    ";
+
+    $query = mysql_query($myquery);
+
+    if ( ! $myquery ) {
+        echo mysql_error();
+        die;
+    }
+
+    $data = array();
+
+    for ($x = 0; $x < mysql_num_rows($query); $x++) {
+        $physicians[] = mysql_fetch_assoc($query);
+    }
+
+    echo json_encode($physicians);     
+
+// Printing results in HTML
+echo "<table>\n";
+while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
+    echo "\t<tr>\n";
+    foreach ($line as $col_value) {
+        echo "\t\t<td>$col_value</td>\n";
+    }
+    echo "\t</tr>\n";
+}
+echo "</table>\n";
+
+    mysql_close($server);
+?>

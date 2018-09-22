@@ -1,0 +1,609 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>Global Health Analytics</title>
+<link rel="stylesheet" type="text/css" href="css/cancer.css">
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script type="text/javascript" src="http://d3js.org/queue.v1.min.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<?php $country = $_REQUEST['country']; ?>
+<script type="text/javascript">
+/*$(document).ready(function(){ 
+	var countryName = "<?php Print($country); ?>";
+	console.log("sucessful");
+	$.getJSON('test.php',{country: countryName},function (data) {
+		json_data = JSON.parse(data);
+  	
+	});
+});*/
+
+</script>
+</head>
+<body>
+    <div class="container2"> 
+    <!--Navigation -->  
+    <div class ="toppic">
+    <img alt="title" src="images/toppic.png" />
+    </div>
+	<div class="navigation">
+    <div class="nav">
+	<ul>
+  	<li ><a href="index.php">Home</a></li>
+  	<li ><a href="workforce.php">Workforce</a></li>
+    <li class="active"><a href="disease.php">Disease</a></li>
+    <li><a href="pupmed.html">PubMed</a></li>
+    <li><a href="network.html">Network Diagram</a></li>
+    <li><a href="ebola3.html">Ebola</a></li>
+	<li><a href="rshiny.html">R Shiny</a></li>
+    <li><a href="aboutus.html">About</a></li>
+	</ul> 
+    </div>
+    </div>
+    </div>
+ <input type="button" value="Print" class="btn" onclick="PrintElem('#content')" style="float: right;"/>
+    <div id="content">
+    <div id="Ctitle">
+    <h2><?php echo $country?></h2>
+    </div>
+    <div id="chart1">
+    <div id="title">
+	<h4>No. of Cancer death in 2008 per 100,000</h4>
+	</div></div><!--end chart1-->
+
+    <div id="chart2">
+    <div id="title">
+    	<h4>Top 50 diseases</h4>
+	</div>
+    <div class="outer">
+     <div id="inner">
+    </div></div></div><!--end chart2-->
+
+    <div id="chart3">
+    <div id="title">
+        <h4>Causes by deaths in the world</h4>
+    </div>
+    <div class="outer1">
+     <div id="inner1">
+    </div>  
+    </div>
+    </div>
+
+    <div id="chart4">
+    <div id="title">
+        <h4>Adult Mortality Rate</h4>
+    </div>
+    <div id="pie1"><div class="pietitle"><h5>Overall</h5></div></div>
+    <div id="pie2"><div class="pietitle"><h5>Under70</h5></div></div>
+    <div id="pie3"><div class="pietitle"><h5>Under60</h5></div></div>
+    <div id="pie4"><div class="pietitle"><h5>Per 100,000</h5></div></div>
+    </div><!--end chart4-->
+
+        <div id="tooltip" class="hidden">
+    <p><strong>Adult Mortality rate </strong>
+    </p>
+    <p><span id="value">100</span></p>
+</div>
+    </div>
+
+</body>
+
+<script>
+    //print
+    function PrintElem(elem) {
+        Popup($(elem).html());
+    }
+
+    function Popup(data) {
+        var mywindow = window.open('', 'content', 'height=1300,width=1110');
+        mywindow.document.write('<html><head><title>Global Health Analytics</title>');
+        mywindow.document.write('<link rel="stylesheet" type="text/css" href="css/cancer.css">');
+        mywindow.document.write('</head><body>');
+        mywindow.document.write(data);
+        mywindow.document.write('</body></html>');
+
+        mywindow.print();
+        mywindow.close();
+
+        return true;
+    }
+
+//chart 1
+var countryName = "<?php Print($country); ?>";	
+var margin = {top: 100, right: 20, bottom: 30, left: 40},
+    width = 300;
+    height = 200;
+
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .5);
+
+var y = d3.scale.linear()
+    .range([200, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+	.scale(y)
+    .orient("left")
+	.ticks(10);
+
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Deaths:</strong> <span style='color:red'>" + d.deaths + "</span>";
+  })
+
+var tip1 = d3.tip()
+.attr('class', 'd3-tip')
+.offset([-10, 0])
+.html(function (d) {
+    return "<strong>Cases:</strong> <span style='color:red'>" + d.cases + "</span>";
+})
+
+var tip2 = d3.tip()
+.attr('class', 'd3-tip')
+.offset([-10, 0])
+.html(function (d) {
+    return "<strong>Deaths:</strong> <span style='color:white'>" + d.deaths + "</br>" + "<strong>Percentage:</strong> <span style='color:white'>" + d.percentage + "% " + "</span>";
+})
+  
+var svg = d3.select("#chart1").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
+
+d3.json("/disease/cancerData.php?country="+countryName, function(error, data) {
+  x.domain(data.map(function(d) { return d.gender;}));
+  y.domain([0, 270]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+    .append("text")
+
+      .attr("transform", "0")
+      .attr("x", 300)
+      .attr("y", -5)
+
+      .attr("dx", ".71em")
+      .style("text-anchor", "middle")
+
+      .text("2008");
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 10)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Deaths");
+
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+
+      .attr("x", function(d) { return x(d.gender); })
+      .attr("width", x.rangeBand(1))
+      .attr("y", function(d) { return y(d.deaths); })
+		  .attr("height", function(d) { return height - y(d.deaths); })
+		  .on('mouseover', tip.show)
+      	  .on('mouseout', tip.hide)	
+	});
+
+function type(d) {
+  d.deaths = +d.deaths;
+  return d;
+}
+
+//chart3
+var margin1 = { top: 100, right: 20, bottom: 30, left: 50 },
+    width1 = 300;
+height1 = 200;
+
+
+
+var xAxis1 = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis1 = d3.svg.axis()
+	.scale(y)
+    .orient("left");
+
+
+
+
+   
+var data = d3.json("/disease/Data.php", renderChart1);
+
+function renderChart1(data) {
+
+    var valueLabelWidth1 = 60; // space reserved for value labels (right)
+    var barHeight1 = 20; // height of one bar
+    var barLabelWidth1 = 200; // space reserved for bar labels
+    var barLabelPadding1 = 5; // padding between bar and bar labels (left)
+    var gridLabelHeight1 = 18; // space reserved for gridline labels
+    var gridChartOffset1 = 3; // space between start of grid and first bar
+    var maxBarWidth1 = 750; // width of the bar with the max value
+    var tip = d3.tip()
+     .attr('class', 'd3-tip')
+     .offset([-10, 0])
+     .html(function (d) {
+         return "<strong>Disease:</strong> <span style='color:white'>" + d.diseaseName + "</br>" + "<strong>Deaths:</strong> <span style='color:white'>" + d.deaths + "</span>";
+     })
+
+    // accessor functions 
+    var barLabel1 = function (d) { return d['diseaseName']; };
+    var barValue1 = function (d) { return parseFloat(d['deaths']); };
+
+    // scales
+    var yScale1 = d3.scale.ordinal().domain(d3.range(0, data.length)).rangeBands([0, data.length * barHeight1]);
+    var yy1 = function (d, i) { return yScale1(i); };
+    var yText1 = function (d, i) { return yy1(d, i) + yScale1.rangeBand() / 2; };
+    var xx1 = d3.scale.linear().domain([0, d3.max(data, barValue1)]).range([0, maxBarWidth1]);
+    // svg container element
+    var chart1 = d3.select('#inner1').append("svg")
+      .attr('width', maxBarWidth1 + barLabelWidth1 + valueLabelWidth1)
+      .attr('height', gridLabelHeight1 + gridChartOffset1 + data.length * barHeight1);
+
+    chart1.call(tip);
+
+    // grid line labels
+    var gridContainer1 = chart1.append('g')
+      .attr('transform', 'translate(' + barLabelWidth1 + ',' + gridLabelHeight1 + ')');
+    gridContainer1.selectAll("tet").data(xx1.ticks(10)).enter().append("tet")
+      .attr("x", xx1)
+      .attr("dy", -3)
+      .attr("text-anchor", "middle")
+      .text(String);
+    // vertical grid lines
+    gridContainer1.selectAll("ine").data(xx1.ticks(10)).enter().append("ine")
+      .attr("x1", xx1)
+      .attr("x2", xx1)
+      .attr("y1", 0)
+      .attr("y2", yScale1.rangeExtent()[1] + gridChartOffset1)
+      .style("stroke", "#ccc");
+    // bar labels
+    var labelsContainer1 = chart1.append('g')
+      .attr('transform', 'translate(' + (barLabelWidth1 - barLabelPadding1) + ',' + (gridLabelHeight1 + gridChartOffset1) + ')');
+    labelsContainer1.selectAll('text').data(data).enter().append('text')
+      .attr('y', yText1)
+      .attr('stroke', 'none')
+      .attr('fill', 'black')
+      .attr("dy", ".35em") // vertical-align: middle
+      .attr('text-anchor', 'end')
+      .text(barLabel1);
+
+
+    // bars
+    var barsContainer1 = chart1.append('g')
+      .attr('transform', 'translate(' + barLabelWidth1 + ',' + (gridLabelHeight1 + gridChartOffset1) + ')');
+    barsContainer1.selectAll("rect").data(data).enter().append("rect")
+      .attr('y', yy1)
+      .attr('height', yScale1.rangeBand())
+      .attr('width', function (d) { return xx1(barValue1(d)); })
+      .attr('stroke', 'white')
+      .attr('fill', 'skyblue')
+
+
+    .on('mouseover', tip.show)
+          .on('mouseout', tip.hide)
+
+    // bar value labels
+    barsContainer1.selectAll("text").data(data).enter().append("text")
+      .attr("x", function (d) { return xx1(barValue1(d)); })
+      .attr("y", yText1)
+      .attr("dx", 3) // padding-left
+      .attr("dy", ".35em") // vertical-align: middle
+      .attr("text-anchor", "start") // text-align: right
+      .attr("fill", "black")
+      .attr("stroke", "none")
+      .text(function (d) { return d3.round(barValue1(d), 2); });
+    // start line
+    barsContainer1.append("line")
+      .attr("y1", -gridChartOffset1)
+      .attr("y2", yScale1.rangeExtent()[1] + gridChartOffset1)
+      .style("stroke", "#000");
+}
+
+//chart2
+var data = d3.json("/disease/top50Data.php?country="+countryName, renderChart);
+
+function renderChart(data) {
+ 
+    var valueLabelWidth = 40; // space reserved for value labels (right)
+    var barHeight = 20; // height of one bar
+    var barLabelWidth = 200; // space reserved for bar labels
+    var barLabelPadding = 5; // padding between bar and bar labels (left)
+    var gridLabelHeight = 18; // space reserved for gridline labels
+    var gridChartOffset = 3; // space between start of grid and first bar
+    var maxBarWidth = 420; // width of the bar with the max value
+    var tip = d3.tip()
+     .attr('class', 'd3-tip')
+     .offset([-10, 0])
+     .html(function (d) {
+         return "<strong>Deaths:</strong> <span style='color:white'>" + d.deaths + "</br>" + "<strong>Percentage:</strong> <span style='color:white'>" + d.percentage + "% " + "</span>";
+     })
+
+
+    // accessor functions 
+    var barLabel = function (d) { return d['diseaseName']; };
+    var barValue = function (d) { return parseFloat(d['deaths']); };
+
+    // scales
+    var yScale = d3.scale.ordinal().domain(d3.range(0, data.length)).rangeBands([0, data.length * barHeight]);
+    var yy = function (d, i) { return yScale(i); };
+    var yText = function (d, i) { return yy(d, i) + yScale.rangeBand() / 2; };
+    var xx = d3.scale.linear().domain([0, d3.max(data, barValue)]).range([0, maxBarWidth]);
+    // svg container element
+    var chart = d3.select('#inner').append("svg")
+      .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
+      .attr('height', gridLabelHeight + gridChartOffset + data.length * barHeight);
+
+    chart.call(tip);
+
+    var gradient = chart.append("chart:defs")
+    .append("chart:linearGradient")
+    .attr("id", "gradient")
+    .attr("x1", "10%")
+    .attr("y1", "0%")
+    .attr("x2", "30%")
+    .attr("y2", "70%")
+    .attr("gradientUnits", "userSpaceOnUse")
+
+    gradient.append("chart:stop")
+    .attr("offset", "0%")
+    .attr("stop-color", "#00FFFF")
+    .attr("stop-opacity", 1);
+
+    gradient.append("chart:stop")
+    .attr("offset", "100%")
+    .attr("stop-color", "blue")
+    .attr("stop-opacity", 1);
+    // grid line labels
+    var gridContainer = chart.append('g')
+      .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')');
+    gridContainer.selectAll("tet").data(xx.ticks(10)).enter().append("tet")
+      .attr("x", xx)
+      .attr("dy", -3)
+      .attr("text-anchor", "middle")
+      .text(String);
+    // vertical grid lines
+    gridContainer.selectAll("ine").data(xx.ticks(10)).enter().append("ine")
+      .attr("x1", xx)
+      .attr("x2", xx)
+      .attr("y1", 0)
+      .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
+      .style("stroke", "#ccc");
+    // bar labels
+    var labelsContainer = chart.append('g')
+      .attr('transform', 'translate(' + (barLabelWidth - barLabelPadding) + ',' + (gridLabelHeight + gridChartOffset) + ')');
+    labelsContainer.selectAll('text').data(data).enter().append('text')
+      .attr('y', yText)
+      .attr('stroke', 'none')
+      .attr('fill', 'black')
+      .attr("dy", ".35em") // vertical-align: middle
+      .attr('text-anchor', 'end')
+      .text(barLabel);
+
+
+    // bars
+    var barsContainer = chart.append('g')
+      .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')');
+    barsContainer.selectAll("rect").data(data).enter().append("rect")
+      .attr('y', yy)
+      .attr('height', yScale.rangeBand())
+      .attr('width', function (d) { return xx(barValue(d)); })
+      .attr('stroke', 'white')
+      .attr('fill', 'skyblue')
+
+
+    .on('mouseover', tip.show)
+          .on('mouseout', tip.hide)
+    .style("fill", "url(#gradient)");
+
+
+    // bar value labels
+    barsContainer.selectAll("text").data(data).enter().append("text")
+      .attr("x", function (d) { return xx(barValue(d)); })
+      .attr("y", yText)
+      .attr("dx", 3) // padding-left
+      .attr("dy", ".35em") // vertical-align: middle
+      .attr("text-anchor", "start") // text-align: right
+      .attr("fill", "black")
+      .attr("stroke", "none")
+      .text(function (d) { return d3.round(barValue(d), 2); });
+    // start line
+    barsContainer.append("line")
+      .attr("y1", -gridChartOffset)
+      .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
+      .style("stroke", "#000");
+}
+
+
+//chart 4
+var m = 10,
+      r = 100,
+      z = d3.scale.category20c();
+
+var width2 = 150,
+    height2 = 150,
+    radius = Math.min(width2, height2) / 2;
+
+var color = d3.scale.ordinal()
+    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
+var arc = d3.svg.arc()
+    .outerRadius(50)
+    .innerRadius(0);
+
+
+
+var arcOver = d3.svg.arc()
+                    .innerRadius(0)
+                    .outerRadius(50 + 30);
+
+var pie = d3.layout.pie()
+    .sort(null)
+    .value(function (d) { return d.overall; });
+
+var pieUnder70 = d3.layout.pie().sort(null).value(function (d) {
+    return d.under70;
+});
+var pieUnder60 = d3.layout.pie().sort(null).value(function (d) {
+    return d.under60;
+});
+var piePer100000 = d3.layout.pie().sort(null).value(function (d) {
+    return d.per100000;
+});
+var svg4 = d3.select("#pie1").append("svg").attr("width", width2).attr("height", height2).append("g").attr("transform", "translate(" + width2 / 2 + "," + height2 / 2 + ")");
+
+
+d3.json("/disease/mortalityData.php?country="+countryName, function (error, data) {
+    var svg42 = d3.select("#pie2").append("svg").attr("width", width2).attr("height", height).append("g").attr("transform", "translate(70," + height2 / 2 + ")");
+    var svg43 = d3.select("#pie3").append("svg").attr("width", width2).attr("height", height).append("g").attr("transform", "translate(70," + height2 / 2 + ")");
+    var svg44 = d3.select("#pie4").append("svg").attr("width", width2).attr("height", height).append("g").attr("transform", "translate(70," + height2 / 2 + ")");
+
+    data.forEach(function (d) {
+        d.overall = +d.overall;
+        d.under70 = +d.under70;
+        d.under60 = +d.under60;
+        d.per100000 = +d.per100000;
+
+    });
+
+    var g = svg4.selectAll(".arc").data(pie(data)).enter().append("g").attr("class", "arc")
+			.on("mousemove", function (d) {
+			    d3.select("#tooltip").style("left", d3.event.pageX + "px")
+                .style("top", d3.event.pageY + "px").style("opacity", 1)
+                .select("#value").text(d.data.overall);
+			})
+			.on("mouseout", function () {
+			    // Hide the tooltip
+			    d3.select("#tooltip").style("opacity", 0);
+			});
+
+    g.append("path").attr("d", arc).style("fill", function (d) {
+        return color(d.data.gender);
+
+    }).on("mousemove", function (d) {
+        d3.select(this).transition().duration(1000).attr("d", arcOver);
+
+    }).on("mouseout", function (d) {
+        d3.select(this).transition().duration(1000).attr("d", arc);
+    });
+
+    g.append("text").attr("transform", function (d) {
+        return "translate(" + arc.centroid(d) + ")";
+    }).attr("dy", ".35em")
+	.attr("text-anchor", "middle") //center the text on it's origin
+	.style("fill", "White").style("font", "12px Arial").text(function (d) {
+	    return d.data.gender
+	});
+    //chart 2
+    var g2 = svg42.selectAll(".arc").data(pieUnder70(data)).enter().append("g").attr("class", "arc")
+	.on("mousemove", function (d) {
+	    d3.select("#tooltip").style("left", d3.event.pageX + "px")
+        .style("top", d3.event.pageY + "px").style("opacity", 1)
+        .select("#value").text(d.data.under70);
+	})
+	.on("mouseout", function () {
+	    // Hide the tooltip
+	    d3.select("#tooltip").style("opacity", 0);
+	});
+
+    g2.append("path").attr("d", arc).style("fill", function (d) {
+        return color(d.data.gender);
+
+    }).on("mousemove", function (d) {
+        d3.select(this).transition().duration(1000).attr("d", arcOver);
+
+    }).on("mouseout", function (d) {
+        d3.select(this).transition().duration(1000).attr("d", arc);
+    });
+
+    g2.append("text").attr("transform", function (d) {
+        return "translate(" + arc.centroid(d) + ")";
+    }).attr("dy", ".35em")
+	.attr("text-anchor", "middle") //center the text on it's origin
+	.style("fill", "White").style("font", "12px Arial").text(function (d) {
+	    return d.data.gender
+	});
+
+    //chart 3
+    var g3 = svg43.selectAll(".arc").data(pieUnder60(data)).enter().append("g").attr("class", "arc")
+.on("mousemove", function (d) {
+    d3.select("#tooltip").style("left", d3.event.pageX + "px")
+    .style("top", d3.event.pageY + "px").style("opacity", 1)
+    .select("#value").text(d.data.under60);
+})
+.on("mouseout", function () {
+    // Hide the tooltip
+    d3.select("#tooltip").style("opacity", 0);
+});
+
+    g3.append("path").attr("d", arc).style("fill", function (d) {
+        return color(d.data.gender);
+
+    }).on("mousemove", function (d) {
+        d3.select(this).transition().duration(1000).attr("d", arcOver);
+
+    }).on("mouseout", function (d) {
+        d3.select(this).transition().duration(1000).attr("d", arc);
+    });
+
+    g3.append("text").attr("transform", function (d) {
+        return "translate(" + arc.centroid(d) + ")";
+    }).attr("dy", ".35em")
+	.attr("text-anchor", "middle") //center the text on it's origin
+	.style("fill", "White").style("font", "12px Arial").text(function (d) {
+	    return d.data.gender
+	});
+
+    //char4
+    var g4 = svg44.selectAll(".arc").data(piePer100000(data)).enter().append("g").attr("class", "arc")
+.on("mousemove", function (d) {
+    d3.select("#tooltip").style("left", d3.event.pageX + "px")
+    .style("top", d3.event.pageY + "px").style("opacity", 1)
+    .select("#value").text(d.data.per100000);
+})
+.on("mouseout", function () {
+    // Hide the tooltip
+    d3.select("#tooltip").style("opacity", 0);
+});
+
+    g4.append("path").attr("d", arc).style("fill", function (d) {
+        return color(d.data.gender);
+
+    }).on("mousemove", function (d) {
+        d3.select(this).transition().duration(1000).attr("d", arcOver);
+
+    }).on("mouseout", function (d) {
+        d3.select(this).transition().duration(1000).attr("d", arc);
+    });
+
+    g4.append("text").attr("transform", function (d) {
+        return "translate(" + arc.centroid(d) + ")";
+    }).attr("dy", ".35em")
+	.attr("text-anchor", "middle") //center the text on it's origin
+	.style("fill", "White").style("font", "12px Arial").text(function (d) {
+	    return d.data.gender
+	});
+});
+
+
+</script>
+</html>

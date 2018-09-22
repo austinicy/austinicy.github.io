@@ -1,0 +1,199 @@
+
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: black;
+}
+
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+#title {
+
+margin-left: 90px;
+position:absolute;
+margin-top: 0px;
+
+}
+#Ctitle {
+	text-align:center;
+	
+}
+#content {
+
+	width: 1110px;
+	height: 1250px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#chart1 {
+border-style: solid;
+border-width: 2px;
+border-color:#CCC;
+border-collapse:collapse;
+position: relative;
+height: 320px;
+width: 370px;
+float: left;
+}
+
+#chart2 {
+border-style: solid;
+border-width: 2px;
+border-color:#CCC;
+border-collapse:collapse;
+position: relative;
+height: 320px;
+width: 730px;
+float: left;
+overflow: visible;
+}
+
+#chart3 {
+border-style: solid;
+border-width: 2px;
+border-color:#CCC;
+border-collapse:collapse;
+border-style: solid;
+position: relative;
+height: 330px;
+width: 370px;
+float: left;
+
+}
+#chart4 {
+border-style: solid;
+border-width: 2px;
+border-color:#CCC;
+border-collapse:collapse;
+position: relative;
+height: 330px;
+width: 730px;
+float: left;
+}
+#chart5 {
+border-style: solid;
+border-width: 2px;
+border-color:#CCC;
+border-collapse:collapse;
+position: relative;
+height: 600px;
+width: 1105px;
+float: left;
+}
+
+.outer {
+	margin-top: 40px;
+    width: 700px;
+    height: 280px;
+    overflow: auto;
+}
+.inner {
+	
+    width: 600px;
+    height: 280px;
+}
+/*pie chart*/
+.arc path {
+  stroke: #fff;
+}
+#tooltip {
+   position: absolute;
+    width: 200px;
+    height: auto;
+    padding: 10px;
+    background-color: white;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    -mox-box-shadow: 4px 4px 4px 10px rgba(0, 0, 0, 0.4);
+    
+}
+#tooltip.hidden {
+    opacity: 0;
+}
+    #tooltip p {
+        margin: 0;
+        font-family: sans-serif;
+        font-size: 16px;
+        line-height: 20px;
+    }
+    #pie1 {
+    margin-top:80px;
+    position:relative;
+    float:left;
+   
+    
+    }
+    #pie2 {
+    position:relative;
+    margin-top:80px;
+    float:left;
+    
+
+    }
+    #pie3 {
+    position:relative;
+    margin-top:80px;
+    float:left;
+    
+  
+    }
+    #pie4 {
+    position:relative;
+    margin-top:80px;
+    float:left;
+    
+    }
+    .pietitle {
+    margin-left: 50px;
+    margin-bottom: 0px;
+
+}
