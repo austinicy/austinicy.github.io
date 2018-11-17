@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Map - Display a map</title>
+  <style type="text/css">
+    html,body{margin:0px;height:100%;width:100%}
+    .container{width:100%;height:100%}
+    #map { width: 100%; height: 100%; background-color : #000;}
+  </style>
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/three@0.97.0/build/three.min.js"></script>
+  <script type="text/javascript" src="lib/maptalks.three.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="data/subzone.js"></script>
+  <script type="text/javascript" src="data/subzonecon.js"></script>
+  <script type="text/javascript" src="lib/dat.gui.min.js"></script>
+  <body>
+
+    <div id="map" class="container"></div>
+
+    <script>
+      var map = new maptalks.Map('map', {
+        center: [103.81529,1.35239],
+        zoom: 12,
+        pitch : 70,
+        baseLayer: new maptalks.TileLayer('tile', {
+          urlTemplate: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+          subdomains: ['a','b','c','d']
+        }),
+        layers : [
+          new maptalks.VectorLayer('v')
+        ]
+      });
+    
+      //$.getJSON("data/subzone_geojson.geojson", function(json) {
+      //subzone = json.features;
+      
+    function getDirectionalLight(intensity) {
+      var light = new THREE.DirectionalLight(0xffffff, intensity);
+	    light.castShadow = true;
+
+	    light.shadow.camera.left = -40;
+	    light.shadow.camera.bottom = -40;
+	    light.shadow.camera.right = 40;
+	    light.shadow.camera.top = 40;
+
+	    light.shadow.mapSize.width = 4096;
+	    light.shadow.mapSize.height = 4096;
+
+	    return light;
+    }
+
+      //var marker = maptalks.GeoJSON.toGeometry(json3).addTo(map.getLayer('v'));
+    var features = [];
+
+    subzone.forEach(function (b) {
+      features = features.concat(b.features);
+    });
+
+    
+    var directionalLight = getDirectionalLight(1);
+    directionalLight.position.x = 13;
+	  directionalLight.position.y = 10;
+	  directionalLight.position.z = 100;
+    directionalLight.intensity = 2;
+
+
+    var threeLayer = new maptalks.ThreeLayer('t');
+    threeLayer.prepareToDraw = function (gl, scene, camera) {
+    var directionalLight = getDirectionalLight(1);
+    
+    scene.add(directionalLight);
+    var me = this;
+
+    features.forEach(function (g) {
+        //var num = g.properties.population;
+        //var color = getColor(num);
+        var subzoneName = g.properties.Name;
+        var consumption = Object.values(subzonecon).indexOf(subzoneName);
+        console.log(consumption);
+        //var num = getHeight(consumption)*10;
+        var num = 1000;
+        var color = getColor(2);
+        var m = new THREE.MeshPhongMaterial({color: color, opacity : 0.5});
+
+        var mesh = me.toExtrudeMesh(maptalks.GeoJSON.toGeometry(g), num, m);
+        if (Array.isArray(mesh)) {
+             scene.add.apply(scene, mesh);
+         } else {
+             scene.add(mesh);
+         }
+        });
+      };
+
+    map.addLayer(threeLayer);
+
+    //});
+
+    var raycaster = new THREE.Raycaster();
+
+
+
+    function getColor(level) {
+      if (level < 2) {
+          return 0x2685a7;
+      } else if (level >= 2 && level <= 5) {
+          return 0xff5733;
+      } else {
+          return 0xff2e00;
+      }
+    }
+
+    function getHeight(level){
+      
+    }
+    </script>
+  </body>
+</html>
