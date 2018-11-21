@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Singapore Subzone Electricity Consumption</title>
+<style type="text/css">
+    html,
+    body {
+        margin: 0px;
+        height: 100%;
+        width: 100%;
+        background-image: url(background.jpg);
+        -webkit-background-size: cover;
+        background-size: cover;
+        background-position: center center;
+        height: 100vh;
+    }
+
+   .container {
+        width: 100%;
+        height: 100%
+    }
+
+    #for nav bar * {
+        margin: 0;
+        padding: 0;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .meanu-area li a {
+        text-decoration: none;
+        color: #fff;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        display: block;
+        padding: 0 25px;
+        font-size: 14px;
+        line-height: 30px;
+        position: relative;
+        z-index: 5;
+    }
+
+    .meanu-area li {
+        list-style: none;
+        display: inline-block;
+    }
+
+    nav {
+        position: absolute;
+        text-align: left;
+        z-index: 5;
+        background: #060606bf;
+        margin: 0 auto;
+        width: calc(100%);
+    }
+
+    .logo {
+        width: 15%;
+        float: left;
+        text-transform: uppercase;
+        color: #fff;
+        font-size: 25px;
+        text-align: left;
+        padding-left: 2%;
+        padding-top: 1%;
+    }
+
+    .meanu-area li a:hover {
+        background: #f7ca1d;
+        color: #fff;
+    }
+
+    .input{
+        padding-top: 20%;
+        padding-left: 40%;
+        margin-left: auto;
+        margin-right: auto;
+        color: black;
+        align-content: center;
+    }
+    input{
+        width: 30%;
+        height: 40px;
+    }
+    label{
+        font-size: 25px;
+    }
+    .btn{
+        width: 50px;
+        height: 50px;
+    }
+
+</style>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="data/public_geopoint.js"></script>
+
+<body>
+    <div class="custom-padding">
+        <nav>
+            <div class="logo">ChargeMatric</div>
+            <ul class="meanu-area">
+                <li><a href="index.html">Subzone Choropleth Map</a></li>
+                <li><a href="planningarea.html">Planing Area</a></li>
+                <li><a href="locate.html">Locate Your Subzone</a></li>
+                <li><a href="https://wiki.smu.edu.sg/18191is428g1/Charge_Metrics">Project Information</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="input">
+        <div><label for="ex3">Please enter your postal code:</label></div>
+        <div><input class="form-control" id="ex3" type="text">
+        <button class="btn" onclick="direct()"><i class="fas fa-angle-right"></i></button>
+        </div>
+    </div>
+    </div>
+    <div id="map" class="container"></div>
+
+    <script>
+        function direct(){
+            var postalcode = document.getElementById('ex3').value;
+            var index = public_geopoint.features.map(function (e) { return e.properties.Postalcode; }).indexOf(parseInt(postalcode));
+            var name = public_geopoint.features[index].properties.Name;
+            window.location.href = "subzone.html?subzone=" + name;
+        }
+    </script>
+
+</body>
+
+</html>

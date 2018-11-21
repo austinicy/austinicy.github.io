@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Singapore Subzone Electricity Consumption</title>
+<style type="text/css">
+  html,
+  body {
+    margin: 0px;
+    height: 100%;
+    width: 100%
+  }
+
+  .container {
+    width: 100%;
+    height: 100%
+  }
+
+  #for nav bar * {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .meanu-area li a {
+    text-decoration: none;
+    color: #fff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: block;
+    padding: 0 25px;
+    font-size: 14px;
+    line-height: 30px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .meanu-area li {
+    list-style: none;
+    display: inline-block;
+  }
+
+  nav {
+    position: absolute;
+    text-align: left;
+    z-index: 5;
+    background: #060606bf;
+    margin: 0 auto;
+    width: calc(100%);
+  }
+
+  .logo {
+    width: 15%;
+    float: left;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 25px;
+    text-align: left;
+    padding-left: 2%;
+    padding-top: 1%;
+  }
+
+  .meanu-area li a:hover {
+    background: #f7ca1d;
+    color: #fff;
+  }
+
+  .my-legend {
+    position: relative;
+    z-index: 4;
+    float: right;
+    padding-top: 7%;
+    padding-right: 2%;
+  }
+
+  .my-legend .legend-title {
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 90%;
+  }
+
+  .my-legend .legend-scale ul {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+  }
+
+  .my-legend .legend-scale ul li {
+    display: block;
+    float: left;
+    width: 50px;
+    margin-bottom: 6px;
+    text-align: center;
+    font-size: 80%;
+    list-style: none;
+  }
+
+  .my-legend ul.legend-labels li span {
+    display: block;
+    float: left;
+    height: 15px;
+    width: 50px;
+  }
+
+  .my-legend .legend-source {
+    font-size: 70%;
+    color: #999;
+    clear: both;
+  }
+
+  .my-legend a {
+    color: #777;
+  }
+
+  .title {
+    position: relative;
+    z-index: 3;
+    float: left;
+    padding-top: 4%;
+    padding-left: 2%;
+    color: #4c4c4c;
+  }
+</style>
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/three@0.97.0/build/three.min.js"></script>
+<script type="text/javascript" src="lib/maptalks.three.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="data/subzone.js"></script>
+<script type="text/javascript" src="data/subzone.js"></script>
+<script type="text/javascript" src="data/subzonecon.js"></script>
+<script type="text/javascript" src="lib/dat.gui.min.js"></script>
+
+<body>
+  <div class="custom-padding">
+    <nav>
+      <div class="logo">ChargeMatric</div>
+      <ul class="meanu-area">
+        <li><a href="index.html">Subzone Choropleth Map</a></li>
+        <li><a href="planningarea.html">Planing Area</a></li>
+        <li><a href="locate.html">Locate Your Subzone</a></li>
+        <li><a href="https://wiki.smu.edu.sg/18191is428g1/Charge_Metrics">Project Information</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="title">
+    <h1>Overview of electricity consumption by subzone</h1>
+  </div>
+  <div class='my-legend'>
+    <div class='legend-title'>Electricity Consumption Kwh</div>
+    <div class='legend-scale'>
+      <ul class='legend-labels'>
+        <li><span style='background:#f2df96;'></span>0 - 20%</li>
+        <li><span style='background:#f7ca1d;'></span>40%</li>
+        <li><span style='background:#f9a600;'></span>60%</li>
+        <li><span style='background:#d66b00;'></span>80%</li>
+      </ul>
+    </div>
+    <div class='legend-source'>Source: <a href="https://www.ema.gov.sg/singapore_energy_statistics.aspx">EMA Singapore</a></div>
+  </div>
+  <div id="map" class="container"></div>
+
+  <script>
+    var map = new maptalks.Map('map', {
+      center: [103.81529, 1.35239],
+      zoom: 12,
+      baseLayer: new maptalks.TileLayer('tile', {
+        urlTemplate: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+        subdomains: ['a', 'b', 'c', 'd']
+      }),
+      layers: [
+        new maptalks.VectorLayer('v')
+      ]
+    });
+
+    //$.getJSON("data/subzone_geojson.geojson", function(json) {
+    //subzone = json.features;
+
+    function getDirectionalLight(intensity) {
+      var light = new THREE.AmbientLight(0xffffff, intensity);
+      light.castShadow = false;
+
+      //light.shadow.camera.left = -40;
+      //light.shadow.camera.bottom = -40;
+      //light.shadow.camera.right = 40;
+      //light.shadow.camera.top = 40;
+
+      //light.shadow.mapSize.width = 4096;
+      //light.shadow.mapSize.height = 4096;
+
+      return light;
+    }
+
+    //var marker = maptalks.GeoJSON.toGeometry(json3).addTo(map.getLayer('v'));
+    var features = [];
+    var directionalLight = getDirectionalLight(1);
+    directionalLight.position.x = 13;
+    directionalLight.position.y = 10;
+    directionalLight.position.z = 100;
+    directionalLight.intensity = 3;
+    var threeLayer = new maptalks.ThreeLayer('t');
+
+    subzone.forEach(function (b) {
+      features = features.concat(b.features);
+    });
+
+    var meshName = {};
+
+    threeLayer.prepareToDraw = function (gl, scene, camera) {
+      var directionalLight = getDirectionalLight(1);
+
+      scene.add(directionalLight);
+      var me = this;
+
+      features.forEach(function (g) {
+        //var num = g.properties.population;
+        //var color = getColor(num);
+        var subzoneName = g.properties.Name;
+        var consumption = subzonecon[subzoneName];
+        var consumptionLevel = 0;
+        var consumptionVol = 1;
+
+        if (consumption != undefined) {
+          consumptionLevel = consumption["13q"];
+          consumptionVol = consumption["2013avg"];
+
+        } else {
+        }
+
+        //var num = getHeight(consumption)*10;
+        var num = getHeight(consumptionVol);
+        var color = getColor(consumptionLevel);
+
+        var m;
+        if (consumptionLevel == 0) {
+          m = new THREE.MeshBasicMaterial({ color: color, opacity: 0.6, side: THREE.BackSide });
+        } else {
+          m = new THREE.MeshBasicMaterial({ color: color, opacity: 1, side: THREE.BackSide });
+        }
+
+        var mesh = me.toExtrudeMesh(maptalks.GeoJSON.toGeometry(g), num, m);
+        meshName[mesh.uuid] = { name: subzoneName, level: consumptionLevel, volume: consumptionVol };
+        if (Array.isArray(mesh)) {
+          scene.add.apply(scene, mesh);
+        } else {
+          scene.add(mesh);
+        }
+      });
+    };
+
+    map.addLayer(threeLayer);
+
+    var raycaster = new THREE.Raycaster();
+
+
+    document.addEventListener('click', function (event) {
+      //event.preventDefault();
+      var mouse = new THREE.Vector2();
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      var objects = [];
+      threeLayer.getScene().children.forEach(child => {
+        if (child instanceof THREE.Mesh) {
+          objects.push(child);
+        }
+      })
+      raycaster.setFromCamera(mouse, threeLayer.getCamera());
+      var intersects = raycaster.intersectObjects(objects);
+      if (intersects.length > 0) {
+        var name = meshName[intersects[0].object.uuid].name;
+        var level = meshName[intersects[0].object.uuid].level;
+        if (level != 0) {
+          window.location.href = "subzone.html?subzone=" + name;
+        }
+      }
+    }, false);
+
+    function getColor(level) {
+      if (level == 0) {
+        return 0x828282;
+      } else if (level == 1) {
+        return 0xf2df96;
+      } else if (level == 2) {
+        return 0xf7ca1d;
+      } else if (level == 3) {
+        return 0xf9a600;
+      } else {
+        return 0xd66b00;
+      }
+    }
+
+    function getHeight(level) {
+      //return level * 5 ;
+      return 5;
+    }
+  </script>
+</body>
+
+</html>
