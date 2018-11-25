@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="@carlvlewis">
+	<!--This is so bootstrap knows how to handle viewports hassle-free-->
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Sales Trend by Month</title>
+
+	<!--C. 2017, Carl V. Lewis. All code MIT Licensed. Keeping my custom JS, CSS and markup all in a single file for, well, good old time's sake. -->
+	<!-- Bootstrap core CSS -->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+	 crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+	 crossorigin="anonymous"></script>
+	<!-- let's not forget our d3.js-->
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.6.0/d3.js'></script>
+	<script src="data/alltypes.js"></script>
+	<!--Now, as in most all d3 vizzes, going to want to employ some basic custom CSS not included in bootstrap to prettify the visualization classes such as .axis, .area, et. al.-->
+
+	<style>
+
+	body {
+	  font: 16px sans-serif;
+	}
+
+  .g-hed {
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size:22px; 
+    margin: 3px 0;
+  }
+
+  .g-source-bold {
+    text-align: left;
+    font-size:10px;
+    font-weight: bold; 
+  }
+
+  .g-source {
+    margin: 10px 0;
+  }
+
+  .g-source-bold {
+    text-align: left;
+    font-size:10px; 
+  }
+
+  .g-intro {
+    font-size: 16px;
+    margin: 0px 0px 10px 0px;
+  }
+
+  .g-labels {
+    font-family: 'Proxima-Nova', sans-serif;
+    fill: white;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+	.axis path,
+	.axis line {
+	  fill: none;
+	  stroke: #fff;
+	  shape-rendering: crispEdges;
+	}
+
+	.line {
+	  fill: none;
+	  stroke: #8ba5be;
+	  stroke-width: 1.5px;
+	}
+
+	.dot {
+	  fill:none;
+	  stroke: steelblue;
+	  stroke-width: 1.5px;
+	}
+	div.tooltip {	
+	    position: absolute;			
+	    text-align: center;			
+	    width: 45px;	
+	    color: #fff;				
+	    height: 20px;					
+	    padding: 1px;				
+	    font: 14px sans-serif;		
+	    background: #272822;	
+	    border: 0px;		
+	    border-radius: 2px;			
+	    pointer-events: none;			
+	}
+	g text {
+		font-size: 12px;
+	}
+	.x.axis1 .tick:first-child text{
+		display: none;
+	}
+	.x.axis2 .tick:nth-last-child() text{
+		display: none;
+	}
+	</style>
+</head>
+<br>
+
+<body>
+	<div class="container">
+		<h2 style="font-size:130%;">Test type of housing</h2>
+		<form>
+			<label class="radio-inline">
+				<input type="radio" name="optradio" value="overallData" checked>All
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="optradio" value="one_twoData">1-room/2-room
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="optradio" value="threeData">3-room
+				<label class="radio-inline">
+					<input type="radio" name="optradio" value="fourData">4-room
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="optradio" value="fiveData">5-room/Executive
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="optradio" value="privateData">Private Apartment and Condominium
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="optradio" value="landedData">Private Landed Property
+				</label>
+		</form>
+	</div>
+	<div id="graph"></div>
+
+
+
+	<!--Including JSON data not only in same format as provided, but also inline, too, rather than in external JSON file. This allows ease of portability, but admittedly creats messy index.html files when there's a large dataset-->
+
+	<script>
+		var scale = 0.8;
+		var loadData = "";
+
+
+		// Positioning and sizing our chart based upon window size and setting margins of 50px on all four sides, including axes, area fill and setting domain/range for data 
+		$("input[name=optradio]").click(function () {
+			var choice = ($("input[name=optradio]:checked").val());
+			if (choice == "overallData") {
+				loadData = overallData;
+			} else if (choice == "one_twoData") {
+				loadData = one_twoData;
+			} else if (choice == "threeData") {
+				loadData = threeData;
+			} else if (choice == "fourData") {
+				loadData = fourData;
+			} else if (choice == "fiveData") {
+				loadData = fiveData;
+			} else if (choice == "privateData") {
+				loadData = privateData;
+			} else {
+				loadData = landedData;
+			}
+			draw(loadData);
+
+		});
+		function draw(loadData) {
+			if (loadData == ""){
+				loadData = overallData;
+			}
+			$("#graph").empty();
+			var margin = { top: 50, right: 50, bottom: 50, left: 50 },
+				width = $(window).width() - margin.left - margin.right,
+				height = $(window).height() * scale - margin.top - margin.bottom;
+			var averages = [];
+
+
+			var data = getData(loadData);
+			var x = d3.scaleLinear()
+				.range([0, width]);
+
+			var y = d3.scaleLinear()
+				.range([height, 0]);
+
+			var line = d3.line()
+				.defined(function (d) { return d; })
+				.x(function (d) { return x(d.x); })
+				.y(function (d) { return y(d.y); });
+
+			var div = d3.select("#graph").append("div")
+				.attr("class", "tooltip")
+				.style("opacity", 0);
+
+			var svg = d3.select("#graph").append("svg")
+				.datum(data)
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
+				.append("g")
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+			// appending svg g, then apppending text element to that, then assigning the month labels to the text element to insert them essentially as annotated text into the d3 chart
+			// Wouldn't this have been oh-so-much easier to use d3.annnotations? If only I'd been so clever as Susie Lu.
+			svg.append("g")
+				.attr("transform", "translate(" + width / 35 + ",0)")
+				.append("text")
+				.text("Jan");
+			svg.append("g")
+				.attr("transform", "translate(" + (width / 35 + width / 12) + ",0)")
+				.append("text")
+				.text("Feb");
+			svg.append("g")
+				.attr("transform", "translate(" + (width / 35 + width * 2 / 12) + ",0)")
+				.append("text")
+				.text("Mar");
+			svg.append("g")
+				.attr("transform", "translate(" + (width / 35 + width * 3 / 12) + ",0)")
+				.append("text")
+				.text("Apr");
+			svg.append("g")
+				.attr("transform", "translate(" + (width / 35 + width * 4 / 12) + ",0)")
+				.append("text")
+				.text("May");
+
+			svg.append("g")
+				.attr("transform", "translate(" + (width / 35 + width * 5 / 12) + ",0)")
+				.append("text")
+				.text("Jun");
+			svg.append("g")
+				.attr("transform", "translate(" + (width / 35 + width * 6 / 12) + ",0)")
+				.append("text")
+				.text("Jul");
+			svg.append("g")
+				.attr("transform", "translate(" + (width / 35 + width * 7 / 12) + ",0)")
+				.append("text")
+				.text("Aug");
+			svg.append("g")
+				.attr("transform", "translate(" + (width / 35 + width * 8 / 12) + ",0)")
+				.append("text")
+				.text("Sep");
+			svg.append("g")
+				.attr("transform", "translate(" + (width / 35 + width * 9 / 12) + ",0)")
+				.append("text")
+				.text("Oct");
+			svg.append("g")
+				.attr("transform", "translate(" + (width / 35 + width * 10 / 12) + ",0)")
+				.append("text")
+				.text("Nov");
+			svg.append("g")
+				.attr("transform", "translate(" + (width / 35 + width * 11 / 12) + ",0)")
+				.append("text")
+				.text("Dec");
+
+			var xAxis = svg.append("g")
+				.attr("class", "x axis")
+				.attr("transform", "translate(0," + height + ")")
+				.call(d3.axisBottom(x));
+			// using selectAll to remove pre-populated linear data ticks on x-axis 
+			xAxis.selectAll("text").remove();
+			xAxis.selectAll("g").remove();
+
+			var yAxis = svg.append("g")
+				.attr("class", "y axis")
+				.call(d3.axisLeft(y));
+
+			yAxis.selectAll("text").remove();
+			yAxis.selectAll("g").remove();
+
+			svg.append("path")
+				.attr("class", "line")
+				.attr("d", line)
+				.attr("stroke-width", 2)
+				.attr("stroke", "#ccc");
+
+
+			//Appends chart headline
+			d3.select(".g-hed").text("Chart headline goes here");
+			//Appends chart intro text
+			d3.select(".g-intro").text("Chart intro text goes here. Write a short sentence describing the chart here.");
+			// Setting y-axis scale to be linear with an appropriate domain beginning, as is mandatory, with 0 set as baseline, then appending svg g onto the left yAxis with 6 tickmarks at equal intervals
+			var yScale = d3.scaleLinear()
+				.domain([0, 1500])
+				.range([height, 0]);
+			var yAxis = svg.append("g")
+				.attr("class", "y axis1")
+				.call(d3.axisLeft(yScale).ticks(6));
+
+			// since the x-axis labels we want to display in this instance are not linear/ordinal, there is no need to set a domain. Because we have five buckets/date ranges to display, we;re simply adding the tick marks now
+
+			var xScale1 = d3.scaleLinear()
+				.domain([0, 600])
+				.range([0, width]);
+			var xAxis1 = svg.append("g")
+				.attr("class", "x axis2")
+				.attr("transform", "translate(0," + height + ")")
+				.call(d3.axisBottom(xScale1)
+					.tickFormat("")
+					.ticks(12));
+			//dynamically calculated mean/average per each month added as a line on y-axis - using svg g to append the lines to all five chart sections whose x-axis positioning is calculated by x1 and x2 based on width of chart overall; then dynamically calculating averages of data to define the position on y-axis
+
+			d3.select("g").append("line")
+				.attr("x1", 0)
+				.attr("x2", width / 12)
+				.attr("y1", averages[0])
+				.attr("y2", averages[0])
+				.attr("stroke", "#f7ca1d")
+				.attr("stroke-width", 2);
+			d3.select("g").append("line")
+				.attr("x1", width / 12)
+				.attr("x2", width * 2 / 12)
+				.attr("y1", averages[1])
+				.attr("y2", averages[1])
+				.attr("stroke", "#f7ca1d")
+				.attr("stroke-width", 2);
+			d3.select("g").append("line")
+				.attr("x1", width * 2 / 12)
+				.attr("x2", width * 3 / 12)
+				.attr("y1", averages[2])
+				.attr("y2", averages[2])
+				.attr("stroke", "#f7ca1d")
+				.attr("stroke-width", 2);
+			d3.select("g").append("line")
+				.attr("x1", width * 3 / 12)
+				.attr("x2", width * 4 / 12)
+				.attr("y1", averages[3])
+				.attr("y2", averages[3])
+				.attr("stroke", "#f7ca1d")
+				.attr("stroke-width", 2);
+			d3.select("g").append("line")
+				.attr("x1", width * 4 / 12)
+				.attr("x2", width * 5 / 12)
+				.attr("y1", averages[4])
+				.attr("y2", averages[4])
+				.attr("stroke", "#f7ca1d")
+				.attr("stroke-width", 2);
+
+
+			d3.select("g").append("line")
+				.attr("x1", width * 5 / 12)
+				.attr("x2", width * 6 / 12)
+				.attr("y1", averages[5])
+				.attr("y2", averages[5])
+				.attr("stroke", "#f7ca1d")
+				.attr("stroke-width", 2);
+			d3.select("g").append("line")
+				.attr("x1", width * 6 / 12)
+				.attr("x2", width * 7 / 12)
+				.attr("y1", averages[6])
+				.attr("y2", averages[6])
+				.attr("stroke", "#f7ca1d")
+				.attr("stroke-width", 2);
+			d3.select("g").append("line")
+				.attr("x1", width * 7 / 12)
+				.attr("x2", width * 8 / 12)
+				.attr("y1", averages[7])
+				.attr("y2", averages[7])
+				.attr("stroke", "#f7ca1d")
+				.attr("stroke-width", 2);
+			d3.select("g").append("line")
+				.attr("x1", width * 8 / 12)
+				.attr("x2", width * 9 / 12)
+				.attr("y1", averages[8])
+				.attr("y2", averages[8])
+				.attr("stroke", "#f7ca1d")
+				.attr("stroke-width", 2);
+			d3.select("g").append("line")
+				.attr("x1", width * 9 / 12)
+				.attr("x2", width * 10 / 12)
+				.attr("y1", averages[9])
+				.attr("y2", averages[9])
+				.attr("stroke", "#f7ca1d")
+				.attr("stroke-width", 2);
+			d3.select("g").append("line")
+				.attr("x1", width * 10 / 12)
+				.attr("x2", width * 11 / 12)
+				.attr("y1", averages[10])
+				.attr("y2", averages[10])
+				.attr("stroke", "#f7ca1d")
+				.attr("stroke-width", 2);
+			d3.select("g").append("line")
+				.attr("x1", width * 11 / 12)
+				.attr("x2", width * 12 / 12)
+				.attr("y1", averages[11])
+				.attr("y2", averages[11])
+				.attr("stroke", "#f7ca1d")
+				.attr("stroke-width", 2);
+
+
+			// let's plot some circles based upon the data points for 'Sales' to give users a visual cue where they can hover or touch for details-on-demand
+
+			var circles = svg.selectAll("circle")
+				.data(data)
+				.enter()
+				.append("circle")
+
+			var circleAttributes = circles
+				.attr("cx", function (d) {
+					return d ? d.x * width : null;
+				})
+				.attr("cy", function (d) {
+					return d ? height - d.y * height : null;
+				})
+				.attr("r", function (d) {
+					return d ? 2 : 0;
+				})
+				.style("fill", "#fff")
+				.attr("stroke", "#989A98")
+				.attr("stroke-width", 1)
+				.on("mouseover", function (d) {
+					div.transition()
+						.duration(200)
+						.style("opacity", .9);
+					div.html(parseInt(d.y * 1500))
+						.style("left", (d3.event.pageX) + "px")
+						.style("top", (d3.event.pageY - 28) + "px");
+				})
+				.on("mouseout", function (d) {
+					div.transition()
+						.duration(500)
+						.style("opacity", 0);
+				});
+			// Conditional statement to append axis labels at dynamically calculated positions; this allows us both to center the labels at the start and end points of the data rather than on the tickmarks, as well as to adjust the '15' label positioning slightly to the left when the size of the viewport is less than 768 so as to prevent overlap.    	        
+			for (var i = 0; i < 12; i++) {
+				d3.select("g").append("text")
+					.text("'05")
+					.attr("x", width * i / 12 + width / 100)
+					.attr("y", height + 25);
+			}
+			for (var i = 0; i < 12; i++) {
+				if (width < 768) {
+					d3.select("g").append("text")
+						.text("'17")
+						.attr("x", width * i / 12 + width * 2 / 50)
+						.attr("y", height + 25);
+				} else {
+					d3.select("g").append("text")
+						.text("'17")
+						.attr("x", width * i / 12 + width * 3 / 50)
+						.attr("y", height + 25);
+				}
+			}
+			// we use svg g to append the axis tickmarks, setting a different x-axis coordinate 
+			d3.select("g").append("line")
+				.attr("x1", width / 12)
+				.attr("x2", width / 12)
+				.attr("y1", 0)
+				.attr("y2", height)
+				.attr("stroke", "#ccc")
+				.attr("stroke-width", 2);
+
+			d3.select("g").append("line")
+				.attr("x1", width * 2 / 12)
+				.attr("x2", width * 2 / 12)
+				.attr("y1", 0)
+				.attr("y2", height)
+				.attr("stroke", "#ccc")
+				.attr("stroke-width", 2);
+
+			d3.select("g").append("line")
+				.attr("x1", width * 3 / 12)
+				.attr("x2", width * 3 / 12)
+				.attr("y1", 0)
+				.attr("y2", height)
+				.attr("stroke", "#ccc")
+				.attr("stroke-width", 2);
+
+			d3.select("g").append("line")
+				.attr("x1", width * 4 / 12)
+				.attr("x2", width * 4 / 12)
+				.attr("y1", 0)
+				.attr("y2", height)
+				.attr("stroke", "#ccc")
+				.attr("stroke-width", 2);
+
+			d3.select("g").append("line")
+				.attr("x1", width * 5 / 12)
+				.attr("x2", width * 5 / 12)
+				.attr("y1", 0)
+				.attr("y2", height)
+				.attr("stroke", "#ccc")
+				.attr("stroke-width", 2);
+
+
+
+			d3.select("g").append("line")
+				.attr("x1", width * 6 / 12)
+				.attr("x2", width * 6 / 12)
+				.attr("y1", 0)
+				.attr("y2", height)
+				.attr("stroke", "#ccc")
+				.attr("stroke-width", 2);
+
+			d3.select("g").append("line")
+				.attr("x1", width * 7 / 12)
+				.attr("x2", width * 7 / 12)
+				.attr("y1", 0)
+				.attr("y2", height)
+				.attr("stroke", "#ccc")
+				.attr("stroke-width", 2);
+
+			d3.select("g").append("line")
+				.attr("x1", width * 8 / 12)
+				.attr("x2", width * 8 / 12)
+				.attr("y1", 0)
+				.attr("y2", height)
+				.attr("stroke", "#ccc")
+				.attr("stroke-width", 2);
+
+			d3.select("g").append("line")
+				.attr("x1", width * 9 / 12)
+				.attr("x2", width * 9 / 12)
+				.attr("y1", 0)
+				.attr("y2", height)
+				.attr("stroke", "#ccc")
+				.attr("stroke-width", 2);
+
+			d3.select("g").append("line")
+				.attr("x1", width * 10 / 12)
+				.attr("x2", width * 10 / 12)
+				.attr("y1", 0)
+				.attr("y2", height)
+				.attr("stroke", "#ccc")
+				.attr("stroke-width", 2);
+
+			d3.select("g").append("line")
+				.attr("x1", width * 11 / 12)
+				.attr("x2", width * 11 / 12)
+				.attr("y1", 0)
+				.attr("y2", height)
+				.attr("stroke", "#ccc")
+				.attr("stroke-width", 2);
+
+			d3.select("g").append("line")
+				.attr("x1", width * 12 / 12)
+				.attr("x2", width * 12 / 12)
+				.attr("y1", 0)
+				.attr("y2", height)
+				.attr("stroke", "#ccc")
+				.attr("stroke-width", 2);
+	
+			// Segmenting the dataset according the value for 'Month" field, then using `break;` to add padding between each segment.
+
+			function getData(loadData) {
+				var data = [];
+				var twoData = [[], [], [], [], [], [], [], [], [], [], [], []];
+				for (var i = 0; i < loadData.length; i++) {
+					switch (loadData[i].month) {
+						case "Jan":
+							twoData[0].push(loadData[i].average);
+							break;
+						case "Feb":
+							twoData[1].push(loadData[i].average);
+							break;
+						case "Mar":
+							twoData[2].push(loadData[i].average);
+							break;
+						case "Apr":
+							twoData[3].push(loadData[i].average);
+							break;
+						case "May":
+							twoData[4].push(loadData[i].average);
+							break;
+
+						case "Jun":
+							twoData[5].push(loadData[i].average);
+							break;
+						case "Jul":
+							twoData[6].push(loadData[i].average);
+							break;
+						case "Aug":
+							twoData[7].push(loadData[i].average);
+							break;
+						case "Sep":
+							twoData[8].push(loadData[i].average);
+							break;
+						case "Oct":
+							twoData[9].push(loadData[i].average);
+							break;
+						case "Nov":
+							twoData[10].push(loadData[i].average);
+							break;
+						case "Dec":
+							twoData[11].push(loadData[i].average);
+							break;
+					}
+				}
+				for (var i = 0; i < 12; i++) {
+					twoData[i].push(null);
+				}
+				data.push(null);
+				var val = 1 / ((loadData.length - 1) * 2);
+				for (var i = 0; i < 12; i++) {
+					for (var j = 0; j < 13; j++) {
+
+						if (twoData[i][j]) {
+							data.push({ x: val, y: twoData[i][j] / 1500 });
+							val += 1 / (loadData.length);
+						} else {
+							data.push(null);
+							val += 1 / ((loadData.length) * 10);
+						}
+
+					}
+				}
+				for (var i = 0; i < 12; i++) {
+					averages[i] = height - twoData[i].reduce(sum, 0) * height / 19500;
+				}
+				return data;
+			}
+			function sum(a, b) {
+				return a + b;
+			}
+		}
+
+		// moment of truth: let's execute the chart and draw it
+
+		draw(loadData);
+
+		// now let's take some considerations for screen-size and scaling to make it all responsive-like. A loop to
+
+		$(window).on("resize", function () {
+			d3.select("svg").remove();
+			if ($(window).width() < 768) {
+				scale = 0.5;
+				draw(loadData);
+			} else {
+				scale = 0.8;
+				draw(loadData);
+			}
+		});
+
+	</script>
+</body>
+
+</html>
