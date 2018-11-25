@@ -242,14 +242,14 @@
 <body>
     <div class="custom-padding">
         <nav>
-            <div class="logo">ChargeMatric</div>
+            <div class="logo">ChargeMetrics</div>
             <ul class="meanu-area">
-                <li><a href="index.html">Subzone Choropleth Map</a></li>
-                <li><a href="planningarea.html">Planing Area</a></li>
-                <li><a href="locate.html">Locate Your Subzone</a></li>
-                <li><a href="https://wiki.smu.edu.sg/18191is428g1/Charge_Metrics">Project Information</a></li>
+              <li><a href="index.html">Subzone Choropleth Map</a></li>
+              <li><a href="planningarea.html">Planning Area</a></li>
+              <li><a href="locate.html">Locate Your Subzone</a></li>
+              <li><a href="https://wiki.smu.edu.sg/18191is428g1/Charge_Metrics">Project Information</a></li>
             </ul>
-        </nav>
+          </nav>
     </div>
     <div class="container">
         <form>
@@ -419,7 +419,7 @@
             d3.select(".g-intro").text("Chart intro text goes here. Write a short sentence describing the chart here.");
             // Setting y-axis scale to be linear with an appropriate domain beginning, as is mandatory, with 0 set as baseline, then appending svg g onto the left yAxis with 6 tickmarks at equal intervals
             var yScale = d3.scaleLinear()
-                .domain([0, 1500])
+                .domain([0, 800])
                 .range([height, 0]);
             var yAxis = svg.append("g")
                 .attr("class", "y axis1")
@@ -550,7 +550,7 @@
                     div.transition()
                         .duration(200)
                         .style("opacity", .9);
-                    div.html(parseInt(d.y * 1500))
+                    div.html(parseInt(d.y * 800))
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
                 })
@@ -733,7 +733,7 @@
                     for (var j = 0; j < 13; j++) {
 
                         if (twoData[i][j]) {
-                            data.push({ x: val, y: twoData[i][j] / 1500 });
+                            data.push({ x: val, y: twoData[i][j] / 800 });
                             val += 1 / (loadData.length);
                         } else {
                             data.push(null);
@@ -743,7 +743,7 @@
                     }
                 }
                 for (var i = 0; i < 12; i++) {
-                    averages[i] = height - twoData[i].reduce(sum, 0) * height / 19500;
+                    averages[i] = height - twoData[i].reduce(sum, 0) * height / 10400;
                 }
                 return data;
             }
