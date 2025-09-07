@@ -1,0 +1,191 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f7f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Password Screen */
+#password-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#password-screen input, #password-screen button {
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+#password-submit-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    align-self: center;
+}
+
+#password-submit-btn:hover {
+    background-color: #2980b9;
+}
+
+
+/* Setup Screen */
+#setup-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.setup-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#setup-screen input, #setup-screen select, #setup-screen button {
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+#start-btn, #home-btn, #next-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    align-self: center;
+}
+
+#start-btn:hover, #home-btn:hover, #next-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Quiz Screen */
+#question-container .question-text {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+}
+
+.option {
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    padding: 0.75rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.option:hover {
+    background-color: #dfe6e9;
+}
+
+.option.selected {
+    border-color: #3498db;
+    background-color: #a9cce3;
+}
+
+.option.correct {
+    background-color: #2ecc71;
+    color: white;
+    border-color: #27ae60;
+}
+
+.option.incorrect {
+    background-color: #e74c3c;
+    color: white;
+    border-color: #c0392b;
+}
+
+#feedback {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Results Screen */
+#results-details .result-item {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+
+#results-details .result-question {
+    font-weight: bold;
+}
+
+#results-details .user-answer.correct {
+    color: #27ae60;
+}
+
+#results-details .user-answer.incorrect {
+    color: #c0392b;
+}
+
+#results-details .correct-answer {
+    color: #27ae60;
+}
+
+.pdf-link {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.pdf-link a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.pdf-link a:hover {
+    text-decoration: underline;
+}
+
+/* History */
+#history-container .history-item {
+    background-color: #f9f9f9;
+    padding: 0.75rem;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}

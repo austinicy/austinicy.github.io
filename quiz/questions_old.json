@@ -1,0 +1,102 @@
+
+[
+  {
+    "page": 2,
+    "question": "You are building an ML model to detect anomalies in real-time sensor data. You will use Pub/Sub to handle incoming requests. You want to store the results for analytics and visualization. How should you configure the pipeline?",
+    "options": [
+      "1 = Dataflow, 2 = Vertex Al, 3 = BigQuery",
+      "1 = DataProc, 2 = AutoML, 3 = Cloud Bigtable",
+      "1 = BigQuery, 2 = AutoML, 3 = Cloud Functions",
+      "1 = BigQuery, 2 = Vertex Al, 3 = Cloud Storage"
+    ],
+    "answer": "A"
+  },
+  {
+    "page": 2,
+    "question": "Your organization wants to make its internal shuttle service route more efficient. The shuttles currently stop at all pick-up points across the city every 30 minutes between 7 am and 10 am. The development team has already built an application on Google Kubernetes Engine that requires users to confirm their presence and shuttle station one day in advance. What approach should you take?",
+    "options": [
+      "1. Build a tree-based regression model that predicts how many passengers will be picked up at each shuttle station. 2. Dispatch an appropriately sized shuttle and provide the map with the required stops based on the prediction.",
+      "1. Build a tree-based classification model that predicts whether the shuttle should pick up passengers at each shuttle station. 2. Dispatch an available shuttle and provide the map with the required stops based on the prediction.",
+      "1. Define the optimal route as the shortest route that passes by all shuttle stations with confirmed attendance at the given time under capacity constraints. 2. Dispatch an appropriately sized shuttle and indicate the required stops on the map.",
+      "1. Build a reinforcement learning model with tree-based classification models that predict the presence of passengers at shuttle stops as agents and a reward function around a distance-based metric. 2. Dispatch an appropriately sized shuttle and provide the map with the required stops based on the simulated outcome."
+    ],
+    "answer": "C"
+  },
+  {
+    "page": 2,
+    "question": "You were asked to investigate failures of a production line component based on sensor readings. After receiving the dataset, you discover that less than 1% of the readings are positive examples representing failure incidents. You have tried to train several classification models, but none of them converge. How should you resolve the class imbalance problem?",
+    "options": [
+      "Use the class distribution to generate 10% positive examples.",
+      "Use a convolutional neural network with max pooling and softmax activation.",
+      "Downsample the data with upweighting to create a sample with 10% positive examples.",
+      "Remove negative examples until the numbers of positive and negative examples are equal."
+    ],
+    "answer": "C"
+  },
+  {
+    "page": 3,
+    "question": "You want to rebuild your ML pipeline for structured data on Google Cloud. You are using PySpark to conduct data transformations at scale, but your pipelines are taking over 12 hours to run. To speed up development and pipeline run time, you want to use a serverless tool and SQL syntax. You have already moved your raw data into Cloud Storage. How should you build the pipeline on Google Cloud while meeting the speed and processing requirements?",
+    "options": [
+      "Use Data Fusion's GUI to build the transformation pipelines, and then write the data into BigQuery.",
+      "Convert your PySpark into SparkSQL queries to transform the data, and then run your pipeline on Dataproc to write the data into BigQuery.",
+      "Ingest your data into Cloud SQL, convert your PySpark commands into SQL queries to transform the data, and then use federated queries from BigQuery for machine learning.",
+      "Ingest your data into BigQuery using BigQuery Load, convert your PySpark commands into BigQuery SQL queries to transform the data, and then write the transformations to a new table."
+    ],
+    "answer": "D"
+  },
+  {
+    "page": 3,
+    "question": "You manage a team of data scientists who use a cloud-based backend system to submit training jobs. This system has become very difficult to administer, and you want to use a managed service instead. The data scientists you work with use many different frameworks, including Keras, PyTorch, theano, Scikit-learn, and custom libraries. What should you do?",
+    "options": [
+      "Use the Al Platform custom containers feature to receive training jobs using any framework.",
+      "Configure Kubeflow to run on Google Kubernetes Engine and receive training jobs through TF Job.",
+      "Create a library of VM images on Compute Engine, and publish these images on a centralized repository.",
+      "Set up Slurm workload manager to receive jobs that can be scheduled to run on your cloud infrastructure."
+    ],
+    "answer": "A"
+  },
+  {
+    "page": 3,
+    "question": "You work for an online retail company that is creating a visual search engine. You have set up an end-to-end ML pipeline on Google Cloud to classify whether an image contains your company's product. Expecting the release of new products in the near future, you configured a retraining functionality in the pipeline so that new data can be fed into your ML models. You also want to use Al Platform's continuous evaluation service to ensure that the models have high accuracy on your test dataset. What should you do?",
+    "options": [
+      "Keep the original test dataset unchanged even if newer products are incorporated into retraining.",
+      "Extend your test dataset with images of the newer products when they are introduced to retraining.",
+      "Replace your test dataset with images of the newer products when they are introduced to retraining.",
+      "Update your test dataset with images of the newer products when your evaluation metrics drop below a pre-decided threshold."
+    ],
+    "answer": "B"
+  },
+  {
+    "page": 4,
+    "question": "You need to build classification workflows over several structured datasets currently stored in BigQuery. Because you will be performing the classification several times, you want to complete the following steps without writing code: exploratory data analysis, feature selection, model building, training, and hyperparameter tuning and serving. What should you do?",
+    "options": [
+      "Configure AutoML Tables to perform the classification task.",
+      "Run a BigQuery ML task to perform logistic regression for the classification.",
+      "Use Al Platform Notebooks to run the classification model with pandas library.",
+      "Use Al Platform to run the classification model job configured for hyperparameter tuning."
+    ],
+    "answer": "A"
+  },
+  {
+    "page": 4,
+    "question": "You work for a public transportation company and need to build a model to estimate delay times for multiple transportation routes. Predictions are served directly to users in an app in real time. Because different seasons and population increases impact the data relevance, you will retrain the model every month. You want to follow Google-recommended best practices. How should you configure the end-to-end architecture of the predictive model?",
+    "options": [
+      "Configure Vertex Al Pipelines to schedule your multi-step workflow from training to deploying your model.",
+      "Use a model trained and deployed on BigQuery ML, and trigger retraining with the scheduled query feature in BigQuery.",
+      "Write a Cloud Functions script that launches a training and deploying job on Vertex Al that is triggered by Cloud Scheduler.",
+      "Use Cloud Composer to programmatically schedule a Dataflow job that executes the workflow from training to deploying your model."
+    ],
+    "answer": "A"
+  },
+  {
+    "page": 4,
+    "question": "You are developing ML models with Al Platform for image segmentation on CT scans. You frequently update your model architectures based on the newest available research papers, and have to rerun training on the same dataset to benchmark their performance. You want to minimize computation costs and manual intervention while having version control for your code. What should you do?",
+    "options": [
+      "Use Cloud Functions to identify changes to your code in Cloud Storage and trigger a retraining job.",
+      "Use the gcloud command-line tool to submit training jobs on Al Platform when you update your code.",
+      "Use Cloud Build linked with Cloud Source Repositories to trigger retraining when new code is pushed to the repository.",
+      "Create an automated workflow in Cloud Composer that runs daily and looks for changes in code in Cloud Storage using a sensor."
+    ],
+    "answer": "C"
+  }
+]
